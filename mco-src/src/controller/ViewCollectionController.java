@@ -145,7 +145,6 @@ public class ViewCollectionController {
     /**
      * Displays the details of the selected card in the TextArea.
      *
-     * @param event the event triggered by selecting a card from the ListView
      */
     @FXML
     public void showCardDetails() {

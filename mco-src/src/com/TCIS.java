@@ -118,9 +118,6 @@ public class TCIS {
      * createDeck
      *
      * @param name - the name of the deck to create
-     * @return void
-     * <p>
-     * This method creates a new deck with the given name if the deck does not already exist.
      */
     public void createDeck(String name) {
 
@@ -168,7 +165,7 @@ public class TCIS {
      * createBinder
      *
      * @param name - the name of the binder to create
-     * @return void
+     * 
      * <p>
      * This method creates a new binder with the given name if the binder does not already exist.
      */
@@ -244,7 +241,7 @@ public class TCIS {
      * deleteDeck
      *
      * @param deck - the deck to be deleted
-     * @return void
+     * 
      * <p>
      * This method deletes the given deck from the system and adds all its cards back to the collection.
      */
@@ -266,7 +263,7 @@ public class TCIS {
      * deleteBinder
      *
      * @param binder - the binder to be deleted
-     * @return void
+     * 
      * <p>
      * This method deletes the given binder from the system and adds all its cards back to the collection.
      */
@@ -287,7 +284,7 @@ public class TCIS {
     /**
      * viewBinders
      *
-     * @return void
+     
      * <p>
      * This method displays the list of binders in the system, with each binder's name and index.
      */
@@ -315,7 +312,7 @@ public class TCIS {
     /**
      * viewDecks
      *
-     * @return void
+     
      * <p>
      * This method displays the list of decks in the system, with each deck's name and index.
      */
@@ -338,6 +335,11 @@ public class TCIS {
         System.out.println("╚═════╩════════════════════════╝");
     }
 
+    /**
+     * Displays the main menu for the Trading Card Inventory System (TCIS)
+     * and provides options for the user to manage their trading card collection.
+     *
+     */
 
     public void displayMenu() {
         System.out.println("Welcome to the TCIS");
