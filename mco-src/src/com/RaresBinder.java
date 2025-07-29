@@ -58,10 +58,6 @@ public class RaresBinder extends Binders implements Sellable {
      */
     @Override
     public void sell() {
-        System.out.println(getName() + " has a value of " + getSaleValue());
-        System.out.print("Would you like to sell it? ");
-        if (Helper.confirmAction()) {
-            TCIS.addMoney(getSaleValue()); // Add the sale value to the player's money
-        }
+        TCIS.addMoney(getSaleValue());
     }
 }
