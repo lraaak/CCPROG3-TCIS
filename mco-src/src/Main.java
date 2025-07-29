@@ -39,6 +39,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
        TCIS tcis = new TCIS();
-               tcis.displayMenu();
+       tcis.displayMenu();
     }
 }
