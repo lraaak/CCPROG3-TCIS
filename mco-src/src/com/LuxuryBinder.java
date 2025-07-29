@@ -10,7 +10,7 @@ public class LuxuryBinder extends Binders implements Sellable {
     }
 
     public void addCard(Cards card){
-        if (!card.getRarity().equalsIgnoreCase("NORMAL")){
+        if (!card.getVariant().equalsIgnoreCase("NORMAL")){
             super.addCard(card);
         }
         else {
