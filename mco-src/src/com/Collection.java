@@ -15,15 +15,14 @@ public class Collection {
     }
 
     /**
-     * addCard
+     * Adds a new card to the collection if it doesn't already exist or increases
+     * the count of an existing card if it does.
      *
      * @param name - the name of the card to be added
      * @param rarity - the rarity of the card (e.g., COMMON, UNCOMMON, RARE, LEGENDARY)
      * @param variant - the variant of the card (if applicable)
      * @param baseValue - the base dollar value of the card
      *
-     * Adds a new card to the collection if it doesn't already exist or increases
-     * the count of an existing card if it does.
      *
      * @return void
      */

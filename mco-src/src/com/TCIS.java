@@ -3,7 +3,7 @@ import java.util.*;
 
 /**
  * TCIS (Trading Card Inventory System) class manages various operations such as creating,
- * deleting, viewing decks, binders, and managing cards in the collection.
+ * deleting, viewing decks, binders, and managing cards in the collection. It also tracks the total money.
  */
 public class TCIS {
 
@@ -12,6 +12,9 @@ public class TCIS {
     private Collection collection;
     private static double money;
 
+    /**
+     * Constructor initializes the decks, binders, and collection for the TCIS system.
+     */
     public TCIS() {
         this.decks = new ArrayList<>();
         this.binders = new ArrayList<>();
@@ -19,55 +22,97 @@ public class TCIS {
         money = 0;
     }
 
+    /**
+     * Validates whether the TCIS system is initialized properly.
+     *
+     * @return {@code true} if decks, binders, and collection are initialized, otherwise {@code false}.
+     */
     public boolean isValid() {
         return this.decks != null && this.binders != null && this.collection != null;
     }
 
+    /**
+     * Returns the collection associated with the TCIS.
+     *
+     * @return The collection associated with the TCIS.
+     */
     public Collection getCollection() {
         return collection;
     }
 
+    /**
+     * Returns the list of decks associated with the TCIS.
+     *
+     * @return The list of decks associated with the TCIS.
+     */
     public ArrayList<Decks> getDecks() {
         return decks;
     }
 
+    /**
+     * Returns the list of binders associated with the TCIS.
+     *
+     * @return The list of binders associated with the TCIS.
+     */
     public ArrayList<Binders> getBinders() {
         return binders;
     }
 
+    /**
+     * Displays the current money available in the TCIS system.
+     */
     public static void showMoney() {
         System.out.println("Your current money: $" + money);
     }
 
+    /**
+     * Adds the specified amount of money to the TCIS money pool.
+     *
+     * @param amount The amount of money to be added.
+     */
     public static void addMoney(double amount) {
         money += amount;
     }
 
+    /**
+     * Returns the current amount of money in the TCIS system.
+     *
+     * @return The current money in the TCIS system.
+     */
     public static double getMoney() {
         return money;
     }
 
+    /**
+     * Sells a binder if it is sellable. The sale will add the sale value to the TCIS money pool and remove the binder.
+     *
+     * @param binder The binder to be sold.
+     */
     public void SellBinder(Binders binder) {
         if (binder instanceof Sellable sellable) {
-            sellable.sell();
+            sellable.sell();  // Sell the binder
             System.out.println("You have sold the binder: " + binder.getName());
-            deleteBinder(binder);
+            deleteBinder(binder);  // Remove the binder from the system
         } else {
             System.out.println("This binder cannot be sold.");
         }
-
     }
 
-
+    /**
+     * Sells a deck if it is sellable. The sale will add the sale value to the TCIS money pool and remove the deck.
+     *
+     * @param deck The deck to be sold.
+     */
     public void SellDeck(Decks deck) {
         if (deck instanceof Sellable sellable) {
-            sellable.sell();
+            sellable.sell();  // Sell the deck
             System.out.println("You have sold the deck: " + deck.getName());
-            deleteDeck(deck);
+            deleteDeck(deck);  // Remove the deck from the system
         } else {
             System.out.println("This deck cannot be sold.");
         }
     }
+
 
     /**
      * createDeck
