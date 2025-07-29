@@ -10,6 +10,10 @@ public class Collection {
     private static ArrayList<Cards> cards;
     private static int totalCount = 0;
 
+    /**
+     * Constructor for Collection that instantiates an ArrayList of Cards with data type {@link Cards}
+     */
+
     public Collection(){
         Collection.cards = new ArrayList<>();
     }
@@ -24,7 +28,6 @@ public class Collection {
      * @param baseValue - the base dollar value of the card
      *
      *
-     * @return void
      */
     public static void addCard(String name, String rarity, String variant, double baseValue) {
 
@@ -50,7 +53,6 @@ public class Collection {
      * Removes a card from the collection by decreasing its count or fully removing
      * it if its count reaches zero.
      *
-     * @return void
      */
     public static void removeCard(String name){
         Cards foundCard = Helper.findCard(name, cards);
@@ -93,7 +95,6 @@ public class Collection {
      * Displays all the cards in the collection in alphabetical order.
      * If no cards are found, it informs the user that the collection is empty.
      *
-     * @return void
      */
     public void displayAllCards() {
 
@@ -109,7 +110,6 @@ public class Collection {
      *
      * Increases the total count of cards in the collection by 1.
      *
-     * @return void
      */
     public static void increaseTotalCount() {
         totalCount++;
@@ -156,7 +156,6 @@ public class Collection {
      * Decreases the count of a specific card in the collection by 1. If the count
      * reaches zero, the card is removed from the collection.
      *
-     * @return void
      */
     public void decreaseCardCount(String name) {
         Cards foundCard = Helper.findCard(name, cards);

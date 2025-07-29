@@ -73,7 +73,6 @@ public class Decks {
     /**
      * decreaseDeckCount
      *
-     * @return void
      *
      * This static method decreases the total number of decks by 1.
      */
@@ -84,7 +83,6 @@ public class Decks {
     /**
      * displayDeck
      *
-     * @return void
      *
      * This method displays all the cards in the deck in alphabetical order. If the deck is empty, it notifies the user.
      */

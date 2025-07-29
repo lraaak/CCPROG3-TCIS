@@ -76,7 +76,6 @@ public class Cards {
     /**
      * increaseCount
      *
-     * @return void
      *
      * Increases the count of the card in the collection by 1.
      */
@@ -87,7 +86,6 @@ public class Cards {
     /**
      * decreaseCount
      *
-     * @return void
      *
      * Decreases the count of the card in the collection by 1, ensuring the count does not go below zero.
      */
