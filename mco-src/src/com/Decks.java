@@ -108,7 +108,7 @@ public class Decks {
     /**
      * getCard
      *
-     * @return ArrayList<Cards> - returns the list of cards in the deck
+     * @return ArrayList- returns the list of cards in the deck
      *
      * This method returns the list of cards in the deck.
      */

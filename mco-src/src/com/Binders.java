@@ -151,7 +151,7 @@ public abstract class Binders {
     /**
      * getCard
      *
-     * @return ArrayList<Cards>
+     * @return ArrayList
      *
      * This method returns the list of cards in the binder.
      */

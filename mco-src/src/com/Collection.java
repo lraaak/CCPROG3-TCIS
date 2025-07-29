@@ -121,7 +121,6 @@ public class Collection {
      * Decreases the total count of cards in the collection by 1, ensuring the count
      * does not go below zero.
      *
-     * @return void
      */
     public static void decreaseTotalCount() {
         if (totalCount > 0)
@@ -135,7 +134,6 @@ public class Collection {
      *
      * Increases the count of a specific card in the collection by 1.
      *
-     * @return void
      */
     public void increaseCardCount(String name) {
         Cards foundCard = Helper.findCard(name, cards);
@@ -177,7 +175,7 @@ public class Collection {
     /**
      * getCard
      *
-     * @return ArrayList<Cards> - returns the list of all cards in the collection
+     * @return ArrayList - returns the list of all cards in the collection
      *
      * Returns the list of all cards currently in the collection.
      */

@@ -365,7 +365,6 @@ public class Helper {
      * @param name - the name of the card to display details of
      * @param cards - the list of cards to search through
      *
-     * @return void
      *
      * This method displays the details of a card (name, rarity, variant, value, and count) if the card is found.
      * Otherwise, it prints an error message.
