@@ -120,6 +120,7 @@ public class Helper {
      *
      * @param cards - the list of cards to display
      *
+     * @return void
      *
      * This method sorts the cards alphabetically by their name and then displays them along with their count.
      */
@@ -138,6 +139,7 @@ public class Helper {
      *
      * @param cards - the list of cards to display
      *
+     * @return void
      *
      * This method sorts the cards alphabetically by their name and then displays them without the count.
      */
@@ -326,7 +328,7 @@ public class Helper {
      * @param variant - the variant of the card
      * @param value - the value of the card
      *
-
+     * @return void
      *
      * This method adds a card to the collection after checking if it conflicts with any existing cards.
      * If a conflict is found, it cancels the addition; otherwise, it adds the card to the collection.
@@ -365,6 +367,7 @@ public class Helper {
      * @param name - the name of the card to display details of
      * @param cards - the list of cards to search through
      *
+     * @return void
      *
      * This method displays the details of a card (name, rarity, variant, value, and count) if the card is found.
      * Otherwise, it prints an error message.
@@ -390,7 +393,7 @@ public class Helper {
      * @param name - the name of the card to display details of
      * @param cards - the list of cards to search through
      *
-
+     * @return void
      *
      * This method displays the details of a card (name, rarity, variant, value, and count) if the card is found.
      * Otherwise, it prints an error message.

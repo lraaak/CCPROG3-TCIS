@@ -16,7 +16,7 @@ public abstract class Binders {
      *
      * @param name - the name of the binder
      *
-    
+     * @return void
      *
      * This constructor initializes the binder with a name and an empty card list, and increases
      * the count of total binders.
@@ -32,7 +32,7 @@ public abstract class Binders {
      *
      * @param card - the card to be added to the binder
      *
-    
+     * @return void
      *
      * This method adds the card to the binder if there is space available. It removes the card
      * from the collection after adding it to the binder.
@@ -53,7 +53,7 @@ public abstract class Binders {
      *
      * @param card - the card to be removed from the binder
      *
-    
+     * @return void
      *
      * This method removes the card from the binder and adds it back to the collection.
      */
@@ -75,7 +75,7 @@ public abstract class Binders {
      * @param otherCard - the card the user is receiving in the trade
      * @param ownCardIndex - the index of the card in the binder to be replaced
      *
-    
+     * @return void
      *
      * This method performs the trade by first adding the incoming card to the collection,
      * prompting the user for confirmation if the value difference between the two cards
@@ -114,6 +114,7 @@ public abstract class Binders {
     /**
      * decreaseBinderCount
      *
+     * @return void
      *
      * This method decreases the total number of binders.
      */
@@ -124,7 +125,7 @@ public abstract class Binders {
     /**
      * displayBinder
      *
-    
+     * @return void
      *
      * This method displays all the cards in the binder in alphabetical order, or notifies
      * if the binder is empty.
@@ -151,7 +152,7 @@ public abstract class Binders {
     /**
      * getCard
      *
-     * @return ArrayList
+     * @return ArrayList<Cards>
      *
      * This method returns the list of cards in the binder.
      */

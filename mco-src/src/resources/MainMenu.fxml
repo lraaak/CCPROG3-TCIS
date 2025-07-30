@@ -4,17 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="326.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+<AnchorPane prefHeight="257.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
 
     <!-- Title Label centered -->
     <Label fx:id="titleLabel" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Trading Card Inventory System" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="20" />
 
     <!-- Buttons for Main Menu -->
     <Button fx:id="addCardButton" layoutX="51.0" layoutY="84.0" onAction="#handleAddCard" text="Add Card" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="84.0" />
-    <Button fx:id="addDeckButton" layoutX="51.0" layoutY="126.0" onAction="#handleAddDeck" text="Add Deck" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="126.0" />
-    <Button fx:id="addBinderButton" layoutX="51.0" layoutY="175.0" onAction="#handleAddBinder" text="Add Binder" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="175.0" />
-    <Button fx:id="viewCollectionButton" layoutX="51.0" layoutY="219.0" onAction="#handleViewCollection" text="View Collection" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="219.0" />
-
-    <!-- Label to display money -->
-    <Label fx:id="moneyLabel" layoutX="51.0" layoutY="266.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Money: $0.00" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="51.0" />
+    <Button fx:id="addDeckButton" layoutX="50.0" layoutY="125.0" onAction="#handleAddDeck" text="Add Deck" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="125.0" />
+    <Button fx:id="addBinderButton" layoutX="51.0" layoutY="167.0" onAction="#handleAddBinder" text="Add Binder" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="167.0" />
+    <Button fx:id="viewCollectionButton" layoutX="50.0" layoutY="211.0" onAction="#handleViewCollection" text="View Collection" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="211.0" />
 </AnchorPane>
