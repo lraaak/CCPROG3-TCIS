@@ -133,7 +133,7 @@ public abstract class Binders {
     /**
      * Returns the list of cards in the binder.
      *
-     * @return ArrayList<Cards> - the list of cards in the binder
+     * @return ArrayList - the list of cards in the binder
      */
     public ArrayList<Cards> getCard() {
         return cards;

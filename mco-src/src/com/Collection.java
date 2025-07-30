@@ -153,7 +153,7 @@ public class Collection {
     /**
      * Returns the list of all cards currently in the collection.
      *
-     * @return ArrayList<Cards> - returns the list of cards in the collection
+     * @return ArrayList - returns the list of cards in the collection
      */
     public ArrayList<Cards> getCard() {
         return cards;
