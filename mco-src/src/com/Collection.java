@@ -10,25 +10,23 @@ public class Collection {
     private static ArrayList<Cards> cards;
     private static int totalCount = 0;
 
-    public Collection(){
+    /**
+     * Initializes an empty collection of cards.
+     */
+    public Collection() {
         Collection.cards = new ArrayList<>();
     }
 
     /**
-     * addCard
+     * Adds a new card to the collection if it doesn't already exist, or increases
+     * the count of an existing card if it does.
      *
      * @param name - the name of the card to be added
      * @param rarity - the rarity of the card (e.g., COMMON, UNCOMMON, RARE, LEGENDARY)
      * @param variant - the variant of the card (if applicable)
      * @param baseValue - the base dollar value of the card
-     *
-     * Adds a new card to the collection if it doesn't already exist or increases
-     * the count of an existing card if it does.
-     *
-     * @return void
      */
     public static void addCard(String name, String rarity, String variant, double baseValue) {
-
         Cards existingCard = Helper.findCard(name, cards);
 
         if (existingCard == null) {
@@ -44,24 +42,19 @@ public class Collection {
     }
 
     /**
-     * removeCard
-     *
-     * @param name - the name of the card to be removed
-     *
      * Removes a card from the collection by decreasing its count or fully removing
      * it if its count reaches zero.
      *
-     * @return void
+     * @param name - the name of the card to be removed
      */
-    public static void removeCard(String name){
+    public static void removeCard(String name) {
         Cards foundCard = Helper.findCard(name, cards);
         if (foundCard != null) {
-            if (foundCard.getSelfCount() > 1){
+            if (foundCard.getSelfCount() > 1) {
                 foundCard.decreaseCount();
                 decreaseTotalCount();
                 System.out.println("Card count decreased. New Count: " + foundCard.getSelfCount());
-            }
-            else {
+            } else {
                 cards.remove(foundCard);
                 decreaseTotalCount();
                 System.out.println("Card removed from collection: " + foundCard.getName());
@@ -71,9 +64,13 @@ public class Collection {
         }
     }
 
-    public static void sellCard(String name){
-        Cards foundCard = Helper.findCard(name, cards);
-
+    /**
+     * Sells a card from the collection, adding its value to the user's money,
+     * and removing it from the collection.
+     *
+     * @param foundCard - the card to be sold
+     */
+    public void sellCard(Cards foundCard) {
         if (foundCard == null) {
             System.out.println("Card not found in collection.");
         } else {
@@ -86,18 +83,11 @@ public class Collection {
         }
     }
 
-
-
     /**
-     * displayAllCards
-     *
      * Displays all the cards in the collection in alphabetical order.
      * If no cards are found, it informs the user that the collection is empty.
-     *
-     * @return void
      */
     public void displayAllCards() {
-
         if (cards.isEmpty()) {
             System.out.println("No cards in collection.");
         } else {
@@ -106,23 +96,15 @@ public class Collection {
     }
 
     /**
-     * increaseTotalCount
-     *
      * Increases the total count of cards in the collection by 1.
-     *
-     * @return void
      */
     public static void increaseTotalCount() {
         totalCount++;
     }
 
     /**
-     * decreaseTotalCount
-     *
      * Decreases the total count of cards in the collection by 1, ensuring the count
      * does not go below zero.
-     *
-     * @return void
      */
     public static void decreaseTotalCount() {
         if (totalCount > 0)
@@ -130,13 +112,9 @@ public class Collection {
     }
 
     /**
-     * addCardCount
-     *
-     * @param name - the name of the card whose count is to be increased
-     *
      * Increases the count of a specific card in the collection by 1.
      *
-     * @return void
+     * @param name - the name of the card whose count is to be increased
      */
     public void increaseCardCount(String name) {
         Cards foundCard = Helper.findCard(name, cards);
@@ -150,14 +128,10 @@ public class Collection {
     }
 
     /**
-     * decreaseCardCount
-     *
-     * @param name - the name of the card whose count is to be decreased
-     *
      * Decreases the count of a specific card in the collection by 1. If the count
      * reaches zero, the card is removed from the collection.
      *
-     * @return void
+     * @param name - the name of the card whose count is to be decreased
      */
     public void decreaseCardCount(String name) {
         Cards foundCard = Helper.findCard(name, cards);
@@ -177,14 +151,11 @@ public class Collection {
     }
 
     /**
-     * getCard
-     *
-     * @return ArrayList<Cards> - returns the list of all cards in the collection
-     *
      * Returns the list of all cards currently in the collection.
+     *
+     * @return ArrayList<Cards> - returns the list of cards in the collection
      */
     public ArrayList<Cards> getCard() {
         return cards;
     }
-
 }

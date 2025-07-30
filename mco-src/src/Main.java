@@ -1,3 +1,5 @@
+import com.*;
+
 import com.Collection;
 import controller.MainMenuController;
 import javafx.application.Application;
@@ -5,12 +7,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
-import com.*;
 import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
 
         TCIS tcis = new TCIS();
+
         // 1. Add cards to collection
         Collection.addCard("alpha", "COMMON", "normal", 10);
         Collection.addCard("beta", "UNCOMMON", "normal", 15);
@@ -18,14 +21,26 @@ public class Main {
         Collection.addCard("delta", "LEGENDARY", "FULL-ART", 40);
         Collection.addCard("epsilon", "RARE", "normal", 30);
         Collection.addCard("zeta", "LEGENDARY", "normal", 60);
+        Collection.addCard("eta", "COMMON", "normal", 5);
+        Collection.addCard("theta", "UNCOMMON", "normal", 7);
+        Collection.addCard("iota", "RARE", "EXTENDED-ART", 22);
+        Collection.addCard("kappa", "LEGENDARY", "FULL-ART", 45);
+        Collection.addCard("lambda", "RARE", "normal", 20);
+        Collection.addCard("mu", "LEGENDARY", "normal", 50);
+        Collection.addCard("nu", "COMMON", "normal", 8);
+        Collection.addCard("xi", "UNCOMMON", "normal", 12);
+        Collection.addCard("omicron", "RARE", "EXTENDED-ART", 28);
+        Collection.addCard("pi", "LEGENDARY", "FULL-ART", 48);
+        Collection.addCard("rho", "RARE", "normal", 18);
+        Collection.addCard("sigma", "LEGENDARY", "normal", 55);
 
         // 2. Create binders
         ArrayList<Binders> binders = new ArrayList<>(Arrays.asList(
-                new NonCuratedBinder("BinderA"),
-                new PauperBinder("BinderB"),
-                new RaresBinder("BinderC"),
-                new LuxuryBinder("BinderD"),
-                new CollectorBinder("BinderE")
+                new NonCuratedBinder("NonCuratedBinderA"),
+                new PauperBinder("PauperBinderB"),
+                new RaresBinder("RaresBinderC"),
+                new LuxuryBinder("LuxuryBinderD"),
+                new CollectorBinder("CollectorBinderE")
         ));
 
         // 3. Loop through a copy of the card list to avoid ConcurrentModificationException
@@ -62,7 +77,31 @@ public class Main {
             }
         }
 
-        // 6. Final binder status
+        // 6. Add cards to decks (9 cards in total)
+        ArrayList<Decks> decks = new ArrayList<>(Arrays.asList(
+                new SellableDeck("SellableDeck1"),
+                new SellableDeck("SellableDeck2"),
+                new Decks("NormalDeck1")
+        ));
+
+        for (int i = 0; i < 9; i++) {
+            String cardName = "card" + i;
+            String rarity = i % 2 == 0 ? "RARE" : "COMMON";
+            String variant = i % 2 == 0 ? "EXTENDED-ART" : "NORMAL";
+            double value = 10 + (i * 5);
+            Collection.addCard(cardName, rarity, variant, value);
+
+            // Add cards to Decks
+            if (i < 5) {
+                decks.get(0).addCard(new Cards(cardName, rarity, variant, value)); // Add first 5 cards to SellableDeck1
+            } else if (i < 9) {
+                decks.get(1).addCard(new Cards(cardName, rarity, variant, value)); // Add next 4 cards to SellableDeck2
+            } else {
+                decks.get(2).addCard(new Cards(cardName, rarity, variant, value)); // Add last 1 card to NormalDeck1
+            }
+        }
+
+        // 7. Final binder and deck status
         System.out.println("\n📦 Final Binder Summary:");
         for (Binders binder : binders) {
             System.out.print("🔍 " + binder.getName() + ": ");
@@ -72,20 +111,25 @@ public class Main {
                 System.out.println(binder.getCard().size() + " card(s).");
             }
         }
-        for (Binders b : binders) {
-            System.out.println("📁 " + b.getName() + " contains " + b.getCard().size() + " card(s):");
-            for (Cards card : b.getCard()) {
-                System.out.println("   - " + card.getName());
+
+        System.out.println("\n📂 Final Deck Summary:");
+        for (Decks deck : decks) {
+            System.out.print("🔍 " + deck.getName() + ": ");
+            if (deck.getCard().isEmpty()) {
+                System.out.println("Empty.");
+            } else {
+                System.out.println(deck.getCard().size() + " card(s).");
             }
-            System.out.println(); // add space between binders
         }
+
+        // 8. Set binders and decks
         tcis.setBinders(binders);
-        Collection.addCard("alpha", "COMMON", "normal", 10);
-        Collection.addCard("beta", "UNCOMMON", "normal", 15);
-        Collection.addCard("gamma", "RARE", "EXTENDED-ART", 25);
-        Collection.addCard("delta", "LEGENDARY", "FULL-ART", 40);
-        Collection.addCard("epsilon", "RARE", "normal", 30);
-        Collection.addCard("zeta", "LEGENDARY", "normal", 60);
+        tcis.setDecks(decks);
+
+        // 9. Show the money
+        TCIS.showMoney();
+
+        // 10. Display menu
         tcis.displayMenu();
     }
 }

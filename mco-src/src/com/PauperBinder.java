@@ -1,32 +1,30 @@
 package com;
 
 /**
- * Represents a PauperBinder, which is a special type of binder that can only contain
- * "NORMAL" or "UNCOMMON" cards and can be sold for a value calculated from the total
- * value of its cards. The PauperBinder class extends the {@link Binders} class and implements
- * the {@link Sellable} interface to allow selling functionality.
+ * The PauperBinder class represents a binder specifically designed for holding
+ * "Common" and "Uncommon" rarity trading cards. This binder is also sellable, meaning
+ * it can be sold for its total card value.
  */
 public class PauperBinder extends Binders implements Sellable {
 
     /**
-     * Constructor to initialize a PauperBinder with the given name.
+     * Initializes the PauperBinder with the specified name and an empty card list.
      *
-     * @param name The name of the PauperBinder.
+     * @param name - the name of the PauperBinder
      */
     public PauperBinder(String name) {
         super(name);
     }
 
     /**
-     * Adds a card to the PauperBinder.
-     * Only cards with the variant "NORMAL" or "UNCOMMON" can be added to this binder.
+     * Adds a card to the binder only if the card's rarity is either "COMMON" or "UNCOMMON".
+     * If the card does not meet these conditions, it is not added to the binder.
      *
-     * @param card The card to add to the binder.
+     * @param card - the card to be added to the binder
      */
     @Override
     public void addCard(Cards card) {
-        // Check if the card's variant is "NORMAL" or "UNCOMMON"
-        if (card.getVariant().equalsIgnoreCase("NORMAL") || card.getVariant().equalsIgnoreCase("UNCOMMON")) {
+        if (card.getRarity().equalsIgnoreCase("COMMON") || card.getRarity().equalsIgnoreCase("UNCOMMON")) {
             super.addCard(card);
         } else {
             System.out.println("Invalid card. Must be either a Normal or Uncommon card.");
@@ -34,25 +32,22 @@ public class PauperBinder extends Binders implements Sellable {
     }
 
     /**
-     * Calculates the sale value of the PauperBinder.
-     * The total value of the binder is calculated by summing the values of all cards
-     * in the binder (no multiplier applied for this binder type).
+     * Calculates the total sale value of the cards in the PauperBinder.
+     * The value is the sum of the final values of all cards in the binder.
      *
-     * @return The sale value of the binder.
+     * @return double - the total sale value of the cards in the binder
      */
     @Override
     public double getSaleValue() {
         double totalValue = 0;
-        // Calculate the total value of all cards in the binder
         for (Cards c : this.getCard()) {
             totalValue += c.getFinalValue();
         }
-        return totalValue; // No multiplier for PauperBinder sale value
+        return totalValue;
     }
 
     /**
-     * Sells the PauperBinder. Displays the binder's sale value and asks the user if they
-     * want to sell it. If the user confirms, the sale value is added to the player's total money.
+     * Sells the PauperBinder by adding its sale value to the total money in the system.
      */
     @Override
     public void sell() {

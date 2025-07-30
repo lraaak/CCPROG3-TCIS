@@ -11,14 +11,14 @@ public class Helper {
     /**
      * findCard
      *
-     * @param name - the name of the card to search for
-     * @param cards - the list of cards to search through
+     * @param name  the name of the card to search for
+     * @param cards the list of cards to search through
      *
      * @return Cards - returns the card if found, or null if not found
      *
      * This method searches for a card in the list by its name and returns the card object.
      */
-    public static Cards findCard (String name, ArrayList<Cards> cards) {
+    public static Cards findCard(String name, ArrayList<Cards> cards) {
         for (Cards card : cards) {
             if (card.getName().equalsIgnoreCase(name)) {
                 return card;  // returns the card object found
@@ -30,11 +30,11 @@ public class Helper {
     /**
      * isCardConflicting
      *
-     * @param cards - the list of cards to check against
-     * @param name - the name of the card to check
-     * @param rarity - the rarity of the card
-     * @param variant - the variant of the card
-     * @param baseValue - the base value of the card
+     * @param cards    the list of cards to check against
+     * @param name     the name of the card to check
+     * @param rarity   the rarity of the card
+     * @param variant  the variant of the card
+     * @param baseValue the base value of the card
      *
      * @return boolean - returns true if a conflicting card is found, false otherwise
      *
@@ -53,7 +53,7 @@ public class Helper {
     /**
      * isValidRarity
      *
-     * @param rarity - the rarity of the card to validate
+     * @param rarity the rarity of the card to validate
      *
      * @return boolean - returns true if the rarity is valid, false otherwise
      *
@@ -66,7 +66,7 @@ public class Helper {
     /**
      * isValidVariant
      *
-     * @param variant - the variant of the card to validate
+     * @param variant the variant of the card to validate
      *
      * @return boolean - returns true if the variant is valid, false otherwise
      *
@@ -80,8 +80,8 @@ public class Helper {
     /**
      * findBinder
      *
-     * @param name - the name of the binder to find
-     * @param binders - the list of binders to search through
+     * @param name    the name of the binder to find
+     * @param binders the list of binders to search through
      *
      * @return Binders - returns the binder object if found, or null if not found
      *
@@ -99,8 +99,8 @@ public class Helper {
     /**
      * findDecks
      *
-     * @param name - the name of the deck to find
-     * @param decks - the list of decks to search through
+     * @param name  the name of the deck to find
+     * @param decks the list of decks to search through
      *
      * @return Decks - returns the deck object if found, or null if not found
      *
@@ -118,9 +118,9 @@ public class Helper {
     /**
      * displayAlphabetically
      *
-     * @param cards - the list of cards to display
+     * @param cards the list of cards to display
      *
-     * @return void
+     * 
      *
      * This method sorts the cards alphabetically by their name and then displays them along with their count.
      */
@@ -137,9 +137,9 @@ public class Helper {
     /**
      * displayAlphabeticallyNoCount
      *
-     * @param cards - the list of cards to display
+     * @param cards the list of cards to display
      *
-     * @return void
+     * 
      *
      * This method sorts the cards alphabetically by their name and then displays them without the count.
      */
@@ -150,7 +150,7 @@ public class Helper {
         System.out.println("Cards:");
         int i = 1;
         for (Cards c : sortedCards) {
-            System.out.println(("[")+i+("]") + ("-") + c.getName());
+            System.out.println(("[") + i + ("]") + ("-") + c.getName());
             i++;
         }
     }
@@ -184,7 +184,7 @@ public class Helper {
     /**
      * generateCard
      *
-     * @param sc - the Scanner object for user input
+     * @param sc the Scanner object for user input
      *
      * @return Cards - returns the newly created card object, or null if the process is canceled or invalid
      *
@@ -223,8 +223,8 @@ public class Helper {
     /**
      * getInput
      *
-     * @param sc - the Scanner object for user input
-     * @param prompt - the message to display to the user
+     * @param sc    the Scanner object for user input
+     * @param prompt the message to display to the user
      *
      * @return String - returns the input from the user, or null if the user cancels by typing "EXIT"
      *
@@ -243,7 +243,7 @@ public class Helper {
     /**
      * getValidRarity
      *
-     * @param sc - the Scanner object for user input
+     * @param sc the Scanner object for user input
      *
      * @return String - returns the valid rarity input from the user, or null if the input is canceled
      *
@@ -267,7 +267,7 @@ public class Helper {
     /**
      * getValidVariant
      *
-     * @param sc - the Scanner object for user input
+     * @param sc the Scanner object for user input
      *
      * @return String - returns the valid variant input from the user, or null if the input is canceled
      *
@@ -290,7 +290,7 @@ public class Helper {
     /**
      * getValidValue
      *
-     * @param sc - the Scanner object for user input
+     * @param sc the Scanner object for user input
      *
      * @return double - returns the valid value input from the user, or 0 if the input is canceled
      *
@@ -322,13 +322,13 @@ public class Helper {
     /**
      * addingCard
      *
-     * @param collection - the collection object to add the card to
-     * @param name - the name of the card to add
-     * @param rarity - the rarity of the card
-     * @param variant - the variant of the card
-     * @param value - the value of the card
+     * @param collection the collection object to add the card to
+     * @param name      the name of the card to add
+     * @param rarity    the rarity of the card
+     * @param variant   the variant of the card
+     * @param value     the value of the card
      *
-     * @return void
+     * 
      *
      * This method adds a card to the collection after checking if it conflicts with any existing cards.
      * If a conflict is found, it cancels the addition; otherwise, it adds the card to the collection.
@@ -345,8 +345,8 @@ public class Helper {
     /**
      * findIndex
      *
-     * @param card - the card to find the index of
-     * @param cards - the list of cards to search through
+     * @param card  the card to find the index of
+     * @param cards the list of cards to search through
      *
      * @return int - returns the index of the card in the list, or -1 if the card is not found
      *
@@ -364,10 +364,10 @@ public class Helper {
     /**
      * displayCardDetails
      *
-     * @param name - the name of the card to display details of
-     * @param cards - the list of cards to search through
+     * @param name  the name of the card to display details of
+     * @param cards the list of cards to search through
      *
-     * @return void
+     * 
      *
      * This method displays the details of a card (name, rarity, variant, value, and count) if the card is found.
      * Otherwise, it prints an error message.
@@ -390,10 +390,10 @@ public class Helper {
     /**
      * displayDeckCard
      *
-     * @param name - the name of the card to display details of
-     * @param cards - the list of cards to search through
+     * @param name  the name of the card to display details of
+     * @param cards the list of cards to search through
      *
-     * @return void
+     * 
      *
      * This method displays the details of a card (name, rarity, variant, value, and count) if the card is found.
      * Otherwise, it prints an error message.
@@ -406,7 +406,7 @@ public class Helper {
             System.out.println("Rarity  : " + foundCard.getRarity());
             System.out.println("Variant : " + foundCard.getVariant());
             System.out.println("Value   : $" + String.format("%.2f", foundCard.getFinalValue()));
-            System.out.println("Count   : 1" );
+            System.out.println("Count   : 1");
             System.out.println("==========================");
         } else {
             System.out.println("Card not found in collection.");

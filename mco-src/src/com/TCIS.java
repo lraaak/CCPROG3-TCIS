@@ -12,6 +12,10 @@ import java.util.*;
         private Collection collection;
         private static double money;
 
+        /**
+         * Constructor that initializes the TCIS system, including decks, binders, and the collection.
+         * Sets initial money to 0.
+         */
         public TCIS() {
             this.decks = new ArrayList<>();
             this.binders = new ArrayList<>();
@@ -19,30 +23,63 @@ import java.util.*;
             money = 0;
         }
 
+        /**
+         * Checks if the TCIS system is valid (i.e., decks, binders, and collection are not null).
+         *
+         * @return true if the TCIS is valid, false otherwise.
+         */
         public boolean isValid() {
             return this.decks != null && this.binders != null && this.collection != null;
         }
 
+        /**
+         * Returns the collection object.
+         *
+         * @return the collection object.
+         */
         public Collection getCollection() {
             return collection;
         }
 
+        /**
+         * Returns the list of decks.
+         *
+         * @return the list of decks.
+         */
         public ArrayList<Decks> getDecks() {
             return decks;
         }
 
+        /**
+         * Returns the list of binders.
+         *
+         * @return the list of binders.
+         */
         public ArrayList<Binders> getBinders() {
             return binders;
         }
 
+        /**
+         * Displays the current money available in the system.
+         */
         public static void showMoney() {
-            System.out.println("Your current money: $" + money);
+            System.out.printf("Your current money: $%.2f%n", money);
         }
 
+        /**
+         * Adds money to the current balance.
+         *
+         * @param amount the amount of money to add.
+         */
         public static void addMoney(double amount) {
             money += amount;
         }
 
+        /**
+         * Returns the current money balance.
+         *
+         * @return the current money balance.
+         */
         public static double getMoney() {
             return money;
         }
@@ -52,7 +89,17 @@ import java.util.*;
             this.binders = b;
         }
 
-        public void SellBinder(Binders binder) {
+        public void setDecks(ArrayList<Decks> d) {
+            this.decks = d;
+        }
+
+        /**
+         * Sells a binder and removes it from the binders list if it's sellable.
+         *
+         * @param binder the binder to sell.
+         */
+
+        public void sellBinder(Binders binder) {
             if (binder instanceof Sellable ) {
                 System.out.printf("%s has a value of $%.2f%n", binder.getName(), ((Sellable) binder).getSaleValue());
                 if (Helper.confirmAction()) {
@@ -66,7 +113,12 @@ import java.util.*;
 
         }
 
-        public void SellDeck(Decks deck) {
+        /**
+         * Sells a deck and removes it from the decks list if it's sellable.
+         *
+         * @param deck the deck to sell.
+         */
+        public void sellDeck(Decks deck) {
             if (deck instanceof Sellable ) {
                 System.out.printf("%s has a value of $%.2f%n", deck.getName(), ((Sellable) deck).getSaleValue());
                 if (Helper.confirmAction()) {
@@ -80,12 +132,9 @@ import java.util.*;
         }
 
         /**
-         * createDeck
+         * Creates a new deck with the given name if it does not already exist.
          *
-         * @param name - the name of the deck to create
-         * @return void
-         * <p>
-         * This method creates a new deck with the given name if the deck does not already exist.
+         * @param name the name of the deck to create.
          */
         public void createDeck(String name) {
 
@@ -130,14 +179,10 @@ import java.util.*;
         }
 
         /**
-         * createBinder
+         * Creates a new binder with the given name if it does not already exist.
          *
-         * @param name - the name of the binder to create
-         * @return void
-         * <p>
-         * This method creates a new binder with the given name if the binder does not already exist.
+         * @param name the name of the binder to create.
          */
-
         public void createBinder(String name) {
             Scanner sc = new Scanner(System.in);
             if (Helper.findBinder(name, binders) == null) {
@@ -206,14 +251,10 @@ import java.util.*;
         }
 
         /**
-         * deleteDeck
+         * Deletes a deck from the system and adds all its cards back to the collection.
          *
-         * @param deck - the deck to be deleted
-         * @return void
-         * <p>
-         * This method deletes the given deck from the system and adds all its cards back to the collection.
+         * @param deck the deck to delete.
          */
-
         public void deleteDeck(Decks deck) {
 
             System.out.println("Deck has been deleted");
@@ -228,14 +269,10 @@ import java.util.*;
         }
 
         /**
-         * deleteBinder
+         * Deletes a binder from the system and adds all its cards back to the collection.
          *
-         * @param binder - the binder to be deleted
-         * @return void
-         * <p>
-         * This method deletes the given binder from the system and adds all its cards back to the collection.
+         * @param binder the binder to delete.
          */
-
         public void deleteBinder(Binders binder) {
 
             System.out.println("Binder has been deleted");
@@ -250,13 +287,8 @@ import java.util.*;
         }
 
         /**
-         * viewBinders
-         *
-         * @return void
-         * <p>
-         * This method displays the list of binders in the system, with each binder's name and index.
+         * Displays the list of binders with their names and indexes.
          */
-
         public void viewBinders() {
             System.out.println("=== BINDERS LIST ===");
 
@@ -278,13 +310,8 @@ import java.util.*;
         }
 
         /**
-         * viewDecks
-         *
-         * @return void
-         * <p>
-         * This method displays the list of decks in the system, with each deck's name and index.
+         * Displays the list of decks with their names and indexes.
          */
-
         public void viewDecks() {
 
             if (decks.isEmpty()) {
@@ -304,6 +331,9 @@ import java.util.*;
         }
 
 
+        /**
+         * Displays Main Menu for the TCIS Program
+         */
         public void displayMenu() {
             System.out.println("Welcome to the TCIS");
             Scanner sc = new Scanner(System.in);
@@ -388,10 +418,14 @@ import java.util.*;
                                             if (Helper.confirmAction()) {
                                                 collection.decreaseCardCount(card.getName());
                                                 System.out.println("Card count has been decreased");
+                                                card = Helper.findCard(cardName, collection.getCard());
+                                                if (card == null ){
+                                                    choice = 0;
+                                                }
                                             }
                                             break;
                                         case 4:
-                                            Collection.sellCard(cardName);
+                                            collection.sellCard(card);
                                             choice = 0;
                                             break;
                                         case 5:
@@ -577,7 +611,7 @@ import java.util.*;
                                         break;
 
                                     case 4:
-                                        SellBinder(binder);
+                                        sellBinder(binder);
                                         binderChoice = 0;
                                         break;
                                     case 5:
@@ -670,7 +704,7 @@ import java.util.*;
                                     case 4:
                                         if (((LuxuryBinder) binder).getSaleValue() > 0) {
                                             System.out.printf("Binder has a total card price of %.2f%n", ((LuxuryBinder) binder).getCardValue());
-                                            System.out.println("Enter custom price: ");
+                                            System.out.print("Enter custom price: ");
                                             double newPrice = sc.nextDouble();
                                             sc.nextLine();
                                             ((LuxuryBinder) binder).setCustomPrice(newPrice);
@@ -680,7 +714,7 @@ import java.util.*;
                                         }
                                         break;
                                     case 5:
-                                        SellBinder(binder);
+                                        sellBinder(binder);
                                         binderChoice = 0;
                                         break;
                                     case 6:
@@ -921,7 +955,7 @@ import java.util.*;
                                             break;
 
                                         case 5:
-                                            SellDeck(deck);
+                                            sellDeck(deck);
                                             deckChoice = 0;
                                             break;
 

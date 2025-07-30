@@ -5,24 +5,22 @@ package com;
  * It includes methods for managing the count of a specific card, as well as calculating its value based on its variant.
  */
 public class Cards {
-    private String name;
-    private String rarity;
-    private String variant;
-    private final double baseValue;
-    private double finalValue;
-    private int self_count; // count of the card in the collection
-
+    private String name;  // Name of the card
+    private String rarity;  // Rarity of the card (e.g., COMMON, UNCOMMON, RARE, LEGENDARY)
+    private String variant;  // Variant of the card (e.g., NORMAL, EXTENDED-ART, FULL-ART, ALT-ART)
+    private final double baseValue;  // Base value of the card
+    private double finalValue;  // Final value of the card after applying variant multiplier
+    private int self_count;  // Count of the card in the collection
 
     /**
-     * Cards Constructor
+     * Constructor for the Cards class.
+     * Initializes the card with the provided details, validates rarity and variant,
+     * and calculates its final value based on the variant.
      *
      * @param name - the name of the card
      * @param rarity - the rarity of the card (e.g., COMMON, UNCOMMON, RARE, LEGENDARY)
      * @param variant - the variant of the card (e.g., NORMAL, EXTENDED-ART, FULL-ART, ALT-ART)
      * @param baseValue - the base dollar value of the card
-     *
-     * This constructor initializes the card with the provided details, validates rarity and variant,
-     * and calculates its final value based on the variant.
      */
     public Cards(String name, String rarity, String variant, double baseValue) {
         this.name = name;
@@ -55,16 +53,14 @@ public class Cards {
     }
 
     /**
-     * calculateValue
+     * Calculates the final value of the card based on its variant.
      *
      * @param baseValue - the base value of the card
      * @param variant - the variant of the card
      *
      * @return double - returns the final value of the card after applying the multiplier based on variant
-     *
-     * This method calculates the final value of the card based on its variant.
      */
-    public double calculateValue(double baseValue, String variant){
+    public double calculateValue(double baseValue, String variant) {
         return switch (variant) {
             case "EXTENDED-ART" -> baseValue * 1.50;
             case "FULL-ART" -> baseValue * 2.0;
@@ -74,92 +70,72 @@ public class Cards {
     }
 
     /**
-     * increaseCount
-     *
-     * @return void
-     *
      * Increases the count of the card in the collection by 1.
      */
-    public void increaseCount(){
+    public void increaseCount() {
         this.self_count++;
     }
 
     /**
-     * decreaseCount
-     *
-     * @return void
-     *
      * Decreases the count of the card in the collection by 1, ensuring the count does not go below zero.
      */
-    public void decreaseCount(){
+    public void decreaseCount() {
         if (self_count > 0) {
             this.self_count--;
-        }
-        else
+        } else {
             System.out.println("You cannot decrease the count of a card that is already at 0.");
+        }
     }
 
     /**
-     * getName
+     * Returns the name of the card.
      *
      * @return String - the name of the card
-     *
-     * This method returns the name of the card.
      */
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
     /**
-     * getRarity
+     * Returns the rarity of the card.
      *
      * @return String - the rarity of the card
-     *
-     * This method returns the rarity of the card.
      */
-    public String getRarity(){
+    public String getRarity() {
         return this.rarity;
     }
 
     /**
-     * getVariant
+     * Returns the variant of the card.
      *
      * @return String - the variant of the card
-     *
-     * This method returns the variant of the card.
      */
-    public String getVariant(){
+    public String getVariant() {
         return this.variant;
     }
 
     /**
-     * getFinalValue
+     * Returns the final calculated value of the card.
      *
      * @return double - the final value of the card
-     *
-     * This method returns the final calculated value of the card.
      */
-    public double getFinalValue(){
+    public double getFinalValue() {
         return this.finalValue;
     }
 
     /**
-     * getBaseValue
+     * Returns the base value of the card.
      *
      * @return double - the base value of the card
-     *
-     * This method returns the base value of the card.
      */
     public double getBaseValue() {
         return baseValue;
     }
 
     /**
-     * getSelfCount
+     * Returns the count of the card in the collection.
      *
      * @return int - the count of the card in the collection
-     *
-     * This method returns the current count of the card in the collection.
      */
     public int getSelfCount() {
         return self_count;

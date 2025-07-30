@@ -12,14 +12,10 @@ public abstract class Binders {
     private static int totalBinders = 0;
 
     /**
-     * Binders Constructor
+     * Initializes the binder with a name and an empty card list, and increases
+     * the count of total binders.
      *
      * @param name - the name of the binder
-     *
-     * @return void
-     *
-     * This constructor initializes the binder with a name and an empty card list, and increases
-     * the count of total binders.
      */
     public Binders(String name){
         this.name = name;
@@ -28,14 +24,11 @@ public abstract class Binders {
     }
 
     /**
-     * addCard
+     * Adds the card to the binder if there is space available. It removes the card
+     * from the collection after adding it to the binder.
      *
      * @param card - the card to be added to the binder
-     *
-     * @return void
-     *
-     * This method adds the card to the binder if there is space available. It removes the card
-     * from the collection after adding it to the binder.
+     * 
      */
     public void addCard(Cards card){
         if (this.cards.size() < 20){
@@ -49,13 +42,10 @@ public abstract class Binders {
     }
 
     /**
-     * removeCard
+     * Removes the card from the binder and adds it back to the collection.
      *
      * @param card - the card to be removed from the binder
-     *
-     * @return void
-     *
-     * This method removes the card from the binder and adds it back to the collection.
+     * 
      */
     public void removeCard(Cards card){
         if (!this.cards.isEmpty()){
@@ -69,17 +59,14 @@ public abstract class Binders {
     }
 
     /**
-     * tradeCards
+     * Performs the trade by first adding the incoming card to the collection,
+     * prompting the user for confirmation if the value difference between the two cards
+     * is greater than or equal to $1, and updating the binder accordingly.
      *
      * @param ownCard - the card the user is giving up in the trade
      * @param otherCard - the card the user is receiving in the trade
      * @param ownCardIndex - the index of the card in the binder to be replaced
-     *
-     * @return void
-     *
-     * This method performs the trade by first adding the incoming card to the collection,
-     * prompting the user for confirmation if the value difference between the two cards
-     * is greater than or equal to $1, and updating the binder accordingly.
+     * 
      */
     public void tradeCards(Cards ownCard, Cards otherCard, int ownCardIndex) {
         // Add the incoming card to the collection first
@@ -112,23 +99,19 @@ public abstract class Binders {
     }
 
     /**
-     * decreaseBinderCount
+     * Decreases the total number of binders.
      *
-     * @return void
-     *
-     * This method decreases the total number of binders.
+     * 
      */
     public static void decreaseBinderCount() {
         totalBinders--;
     }
 
     /**
-     * displayBinder
-     *
-     * @return void
-     *
-     * This method displays all the cards in the binder in alphabetical order, or notifies
+     * Displays all the cards in the binder in alphabetical order, or notifies
      * if the binder is empty.
+     *
+     * 
      */
     public void displayBinder() {
         if (cards.isEmpty()){
@@ -139,37 +122,29 @@ public abstract class Binders {
     }
 
     /**
-     * getName
+     * Returns the name of the binder.
      *
-     * @return String
-     *
-     * This method returns the name of the binder.
+     * @return String - the name of the binder
      */
     public String getName() {
         return name;
     }
 
     /**
-     * getCard
+     * Returns the list of cards in the binder.
      *
-     * @return ArrayList<Cards>
-     *
-     * This method returns the list of cards in the binder.
+     * @return ArrayList<Cards> - the list of cards in the binder
      */
     public ArrayList<Cards> getCard() {
         return cards;
     }
 
     /**
-     * getTotalBinders
+     * Returns the total count of binders.
      *
-     * @return int
-     *
-     * This method returns the total count of binders.
+     * @return int - the total count of binders
      */
     public static int getTotalBinders() {
         return totalBinders;
     }
-
-
 }
