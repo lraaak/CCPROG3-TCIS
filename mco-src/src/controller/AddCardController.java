@@ -12,70 +12,51 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.event.ActionEvent;
 
-/**
- * The {@code AddCardController} class handles the interaction for adding a new card to the collection in the TCIS (Trading Card Inventory System).
- * It manages the user's input, including card name, rarity, variant, and value, and processes the addition or update of a card in the collection.
- */
 public class AddCardController {
 
     private TCIS tcis;  // Declare TCIS to hold the reference
 
     @FXML
-    private TextField cardNameField;  // Input field for card name
+    private TextField cardNameField;
     @FXML
-    private ChoiceBox<String> rarityChoiceBox;  // ChoiceBox for selecting the rarity of the card
+    private ChoiceBox<String> rarityChoiceBox;
     @FXML
-    private ChoiceBox<String> variantChoiceBox;  // ChoiceBox for selecting the variant of the card
+    private ChoiceBox<String> variantChoiceBox;
     @FXML
-    private TextField valueField;  // Input field for card value
+    private TextField valueField;
 
-    /**
-     * Setter for TCIS to pass the reference from the main application.
-     *
-     * @param tcis The TCIS instance to set.
-     */
+    // Setter for TCIS
     public void setTCIS(TCIS tcis) {
         this.tcis = tcis;
         System.out.println("TCIS object passed successfully to AddCardController.");
     }
 
-    /**
-     * Initializes the components of the AddCard form.
-     * Populates the ChoiceBoxes with predefined values for rarity and variant.
-     * Sets the default visibility of the variantChoiceBox based on the rarity selected.
-     */
+
     @FXML
     public void initialize() {
-        // Populate Rarity ChoiceBox with values
+
         rarityChoiceBox.getItems().addAll("Common", "Uncommon", "Rare", "Legendary");
 
-        // Set default value for Rarity
-        rarityChoiceBox.setValue("Common");  // Default to "Common"
 
-        // Populate Variant ChoiceBox with values
+        rarityChoiceBox.setValue("Common");
+
+
         variantChoiceBox.getItems().addAll("Normal", "Extended-Art", "Full-Art", "Alt-Art");
 
-        // Set default value for Variant
-        variantChoiceBox.setValue("Normal");  // Default to "Normal"
 
-        // Set default visibility of Variant ChoiceBox
+        variantChoiceBox.setValue("Normal");
+
+
         variantChoiceBox.setVisible(false);
 
-        // Set action listener for Rarity ChoiceBox
+
         rarityChoiceBox.setOnAction(this::updateVariantVisibility);
 
-        updateVariantVisibility(null);  // Initialize visibility based on the current rarity selection
+        updateVariantVisibility(null);
     }
 
-    /**
-     * Updates the visibility of the Variant ChoiceBox based on the selected Rarity.
-     * If the rarity is "Rare" or "Legendary", the variantChoiceBox becomes visible.
-     * Otherwise, it is hidden.
-     *
-     * @param event The action event triggered when the Rarity selection changes.
-     */
+
     private void updateVariantVisibility(ActionEvent event) {
-        // Show Variant ChoiceBox if "Rare" or "Legendary" is selected
         if ("Rare".equals(rarityChoiceBox.getValue()) || "Legendary".equals(rarityChoiceBox.getValue())) {
             variantChoiceBox.setVisible(true);
         } else {
@@ -83,11 +64,7 @@ public class AddCardController {
         }
     }
 
-    /**
-     * Handles the event when the "Add Card" button is clicked.
-     * Validates the user's input, creates a new card or updates an existing card in the collection.
-     * Displays a success or error message depending on the outcome.
-     */
+
     @FXML
     public void handleAddCard() {
         String cardName = cardNameField.getText().trim();
@@ -101,12 +78,12 @@ public class AddCardController {
             return;
         }
 
-        // Set variant to "Normal" if rarity is "Common" or "Uncommon"
+
         if (rarity.equals("Common") || rarity.equals("Uncommon")) {
             variant = "Normal";
         }
 
-        // Validate value as a double
+
         double value;
         try {
             value = Double.parseDouble(valueStr);
@@ -119,30 +96,24 @@ public class AddCardController {
             return;
         }
 
-        // Check if the card already exists in the collection
+
         Cards existingCard = Helper.findCard(cardName, tcis.getCollection().getCard());
         if (existingCard != null && existingCard.getRarity().equals(rarity) && existingCard.getVariant().equals(variant)) {
-            // Increase the count if the card exists
+
             tcis.getCollection().increaseCardCount(cardName);
             showAlert(AlertType.INFORMATION, "Card Count Increased", "Card count increased by 1.");
         } else {
-            // If the card doesn't exist, create a new card and add it to the collection
             Cards newCard = new Cards(cardName, rarity.toUpperCase(), variant.toUpperCase(), value);
             Collection.addCard(newCard.getName(), newCard.getRarity(), newCard.getVariant(), newCard.getBaseValue());
             showAlert(AlertType.INFORMATION, "Success", newCard.getName() + " | " + newCard.getRarity() + " | " + newCard.getVariant() + " | $" + newCard.getFinalValue() + " added to the collection.");
         }
 
-        // Go back to the Main Menu after successful addition
+
         goBackToMainMenu();
     }
 
-    /**
-     * Displays an alert with the given type, title, and message.
-     *
-     * @param alertType The type of alert to show (e.g., INFORMATION, ERROR).
-     * @param title The title of the alert.
-     * @param message The message to display in the alert.
-     */
+
+
     private void showAlert(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -151,18 +122,11 @@ public class AddCardController {
         alert.showAndWait();
     }
 
-    /**
-     * Handles the "Back to Main Menu" button click event.
-     * Navigates the user back to the main menu.
-     */
     @FXML
     public void handleBackToMainMenu() {
         goBackToMainMenu();
     }
 
-    /**
-     * Navigates the user back to the main menu.
-     */
     private void goBackToMainMenu() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/MainMenu.fxml"));

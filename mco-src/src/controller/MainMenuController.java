@@ -2,11 +2,13 @@ package controller;
 
 import com.*;
 
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
@@ -24,16 +26,40 @@ public class MainMenuController {
     private Button viewCollectionButton;
 
     @FXML
+    private Label moneyLabel; // Label to display money
+
+    @FXML
     public void setTCIS(TCIS tcis) {
         this.tcis = tcis;
+        updateMoneyLabel();  // Update the money display when the TCIS is set
+    }
+
+    // Update the money label based on current TCIS balance
+    private void updateMoneyLabel() {
+        double currentMoney = TCIS.getMoney(); // Get current money from TCIS
+        moneyLabel.setText("Money: $" + String.format("%.2f", currentMoney)); // Update label with formatted money
     }
 
     @FXML
-    public void handleAddCard() {
-        if (tcis != null && tcis.isValid()) {
-            System.out.println("Add Card clicked.");
-        } else {
-            System.out.println("TCIS is not initialized properly.");
+    public void handleAddCard () {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/add_card.fxml"));
+            AnchorPane root = loader.load();
+
+
+            AddCardController addCardController = loader.getController();
+            addCardController.setTCIS(tcis);
+
+
+            Stage stage = (Stage) addCardButton.getScene().getWindow();
+
+
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -66,7 +92,7 @@ public class MainMenuController {
                 ViewCollectionController viewController = loader.getController();
                 if (viewController != null) {
                     viewController.setTCIS(tcis);
-                    
+
                     Scene viewCollectionScene = new Scene(root, 600, 400);
                     Stage primaryStage = (Stage) viewCollectionButton.getScene().getWindow();
                     primaryStage.setScene(viewCollectionScene);
@@ -81,6 +107,4 @@ public class MainMenuController {
         }
     }
 
-    public void handleBackToMainMenu(ActionEvent event) {
-    }
 }
