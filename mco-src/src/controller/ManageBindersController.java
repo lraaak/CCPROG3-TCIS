@@ -311,9 +311,6 @@ public class ManageBindersController {
         dialog.setContentText("Choose a card:");
 
         dialog.showAndWait().ifPresent(selectedCard -> {
-            if (selectedBinder.getCard().contains(selectedCard)) {
-                HelperController.showAlert("Card Exists", "This card is already in the binder.");
-            } else {
                 boolean isValid = false;
 
                 // Check if the card meets the restrictions for this binder
@@ -323,7 +320,13 @@ public class ManageBindersController {
                     } else {
                         HelperController.showAlert("Invalid Card", "Card must have a variant other than NORMAL for Luxury Binder.");
                     }
-                } else if (selectedBinder instanceof PauperBinder) {
+                } else if (selectedBinder instanceof RaresBinder) {
+                    if (selectedCard.getRarity().equalsIgnoreCase("RARE") || selectedCard.getRarity().equalsIgnoreCase("LEGENDARY")) {
+                        isValid = true;
+                    } else {
+                        HelperController.showAlert("Invalid Card", "Card must be either RARE or LEGENDARY for Rares Binder.");
+                    }
+                }else if (selectedBinder instanceof PauperBinder) {
                     if (selectedCard.getRarity().equalsIgnoreCase("COMMON") || selectedCard.getRarity().equalsIgnoreCase("UNCOMMON")) {
                         isValid = true;
                     } else {
@@ -349,7 +352,6 @@ public class ManageBindersController {
                 }
 
                 showBinderDetails(); // Refresh binder details after card is added
-            }
         });
     }
 
