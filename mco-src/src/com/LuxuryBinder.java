@@ -25,6 +25,7 @@ public class LuxuryBinder extends Binders implements Sellable {
      *
      * @param card - the card to be added to the binder
      */
+    @Override
     public void addCard(Cards card) {
         if (!card.getVariant().equalsIgnoreCase("NORMAL")) {
             super.addCard(card);
@@ -40,15 +41,19 @@ public class LuxuryBinder extends Binders implements Sellable {
      * @param price - the custom price to set for the binder
      */
     public void setCustomPrice(double price) {
+        // Ensure there are cards in the binder before setting the price
+        if (this.getCard().isEmpty()) {
+            System.out.println("Cannot set custom price. No cards in the binder.");
+            return;
+        }
+
         double minPrice = getCardValue();
 
         if (minPrice < price) {
-            if (Helper.confirmAction()) {
-                this.customPrice = price;
-                System.out.println("Binder price has been changed to " + price);
-            }
+            this.customPrice = price;
+            System.out.println("Binder price has been changed to $" + price);
         } else {
-            System.out.println("Custom Price must be greater than the minimum price of the cards in the binder.");
+            System.out.println("Custom Price must be greater than the minimum price of the cards in the binder ($" + minPrice + ").");
         }
     }
 
@@ -83,8 +88,6 @@ public class LuxuryBinder extends Binders implements Sellable {
     /**
      * Sells the binder, adding its sale value to the system's total money.
      * The binder is removed after being sold.
-     *
-     * 
      */
     @Override
     public void sell() {

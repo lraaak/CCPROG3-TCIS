@@ -45,6 +45,11 @@ public class ManageBindersController {
     @FXML
     private Button tradeCardButton;
 
+    @FXML
+    private TextField customPriceTextField; // TextField for custom price input
+    @FXML
+    private Button setCustomPriceButton;   // Button to set the custom price
+
     private ObservableList<Binders> binders;
     private Binders selectedBinder;
 
@@ -61,6 +66,8 @@ public class ManageBindersController {
         removeCardButton.setDisable(true);
         sellBinderButton.setVisible(false);
         tradeCardButton.setVisible(false);
+        setCustomPriceButton.setVisible(false); // Hide custom price field and button by default
+        customPriceTextField.setVisible(false);
     }
 
     @FXML
@@ -79,14 +86,61 @@ public class ManageBindersController {
             tradeCardButton.setVisible(!sellable);
             addCardButton.setDisable(false);
             removeCardButton.setDisable(false);
+
+            if (selectedBinder instanceof LuxuryBinder) {
+                setCustomPriceButton.setVisible(true);
+                customPriceTextField.setVisible(true); // Show custom price input and button for LuxuryBinder
+            } else {
+                setCustomPriceButton.setVisible(false);
+                customPriceTextField.setVisible(false); // Hide for other binders
+            }
         } else {
             cardsTextArea.clear();
             addCardButton.setDisable(true);
             removeCardButton.setDisable(true);
             sellBinderButton.setVisible(false);
             tradeCardButton.setVisible(false);
+            setCustomPriceButton.setVisible(false);
+            customPriceTextField.setVisible(false);
         }
     }
+
+    @FXML
+    public void setCustomPrice(ActionEvent event) {
+        if (selectedBinder instanceof LuxuryBinder) {
+            // Check if the binder has any cards
+            if (selectedBinder.getCard().isEmpty()) {
+                HelperController.showAlert("No Cards", "Cannot modify the price. The binder has no cards.");
+                return;
+            }
+
+            try {
+                double customPrice = Double.parseDouble(customPriceTextField.getText());
+
+                if (customPrice <= 0) {
+                    HelperController.showAlert("Invalid Input", "Please enter a valid price greater than 0.");
+                    return;
+                }
+
+                double minPrice = ((LuxuryBinder) selectedBinder).getCardValue(); // Get the minimum price of the cards in the binder
+
+                // Only set the custom price if it is valid
+                if (customPrice > minPrice) {
+                    ((LuxuryBinder) selectedBinder).setCustomPrice(customPrice); // Set the custom price
+
+                    // Show the alert only when the price is actually set
+                    HelperController.showAlert("Price Set", "Custom price set to $" + customPrice);
+                } else {
+                    // Show an error if the price is not valid
+                    HelperController.showAlert("Invalid Price", "Custom price must be greater than the minimum value of the cards in the binder ($" + minPrice + ").");
+                }
+            } catch (NumberFormatException e) {
+                // Show an error if the input is not a valid number
+                HelperController.showAlert("Invalid Input", "Please enter a valid number for the price.");
+            }
+        }
+    }
+
 
     @FXML
     public void deleteBinder() {
@@ -185,34 +239,49 @@ public class ManageBindersController {
                 HelperController.showAlert("Trade Cancelled", "No card was received.");
                 return;
             }
+
             boolean proceed = true;
+
+            // Step 3: Check if the incoming card meets the binder restrictions
             if (selectedBinder instanceof CollectorBinder) {
-                proceed = (otherCard.getRarity().equalsIgnoreCase("RARE") ||
-                        otherCard.getRarity().equalsIgnoreCase("LEGENDARY")) &&
-                        !otherCard.getVariant().equalsIgnoreCase("NORMAL");
+                if (!(otherCard.getRarity().equalsIgnoreCase("RARE") || otherCard.getRarity().equalsIgnoreCase("LEGENDARY")) || otherCard.getVariant().equalsIgnoreCase("NORMAL")) {
+                    HelperController.showAlert("Invalid Card", "Card must be either RARE or LEGENDARY and not NORMAL for Collector Binder.");
+                    proceed = false;
+                }
+            } else if (selectedBinder instanceof LuxuryBinder) {
+                if (otherCard.getVariant().equalsIgnoreCase("NORMAL")) {
+                    HelperController.showAlert("Invalid Card", "Card must have a variant other than NORMAL for Luxury Binder.");
+                    proceed = false;
+                }
+            } else if (selectedBinder instanceof PauperBinder) {
+                if (!(otherCard.getRarity().equalsIgnoreCase("COMMON") || otherCard.getRarity().equalsIgnoreCase("UNCOMMON"))) {
+                    HelperController.showAlert("Invalid Card", "Card must be either COMMON or UNCOMMON for Pauper Binder.");
+                    proceed = false;
+                }
             }
 
-                if (proceed) {
-                    double valueDifference = Math.abs(ownCard.getFinalValue() - otherCard.getFinalValue());
-                    String msg = "Trade " + ownCard.getName() + " for " + otherCard.getName() + "?";
-                    if (valueDifference >= 1.0) {
-                        msg += "\nNote: Value difference is $" + String.format("%.2f", valueDifference);
-                    }
-
-                    boolean confirm = HelperController.confirmAction("Confirm Trade", msg);
-                    if (confirm) {
-                        selectedBinder.getCard().set(ownCardIndex, otherCard);
-                        HelperController.showAlert("Trade Complete", ownCard.getName() + " was traded for " + otherCard.getName());
-                        showBinderDetails(); // Refresh view
-                    } else {
-                        HelperController.showAlert("Cancelled", "Trade was cancelled.");
-                    }
+            // Step 4: Proceed with the trade if all restrictions are met
+            if (proceed) {
+                double valueDifference = Math.abs(ownCard.getFinalValue() - otherCard.getFinalValue());
+                String msg = "Trade " + ownCard.getName() + " for " + otherCard.getName() + "?";
+                if (valueDifference >= 1.0) {
+                    msg += "\nNote: Value difference is $" + String.format("%.2f", valueDifference);
                 }
-        }catch(IOException e){
-            e.printStackTrace();
-    }
-        }
 
+                boolean confirm = HelperController.confirmAction("Confirm Trade", msg);
+                if (confirm) {
+                    selectedBinder.getCard().set(ownCardIndex, otherCard);
+                    HelperController.showAlert("Trade Complete", ownCard.getName() + " was traded for " + otherCard.getName());
+                    showBinderDetails(); // Refresh view
+                } else {
+                    HelperController.showAlert("Cancelled", "Trade was cancelled.");
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @FXML
@@ -240,10 +309,41 @@ public class ManageBindersController {
             if (selectedBinder.getCard().contains(selectedCard)) {
                 HelperController.showAlert("Card Exists", "This card is already in the binder.");
             } else {
-                if (HelperController.confirmAction("Adding Card", "Are you sure you want to add " + selectedCard.getName()+ " to " + selectedBinder.getName())) {
-                    selectedBinder.addCard(selectedCard);
+                boolean isValid = false;
+
+                // Check if the card meets the restrictions for this binder
+                if (selectedBinder instanceof LuxuryBinder) {
+                    if (!selectedCard.getVariant().equalsIgnoreCase("NORMAL")) {
+                        isValid = true;
+                    } else {
+                        HelperController.showAlert("Invalid Card", "Card must have a variant other than NORMAL for Luxury Binder.");
+                    }
+                } else if (selectedBinder instanceof PauperBinder) {
+                    if (selectedCard.getRarity().equalsIgnoreCase("COMMON") || selectedCard.getRarity().equalsIgnoreCase("UNCOMMON")) {
+                        isValid = true;
+                    } else {
+                        HelperController.showAlert("Invalid Card", "Card must be either COMMON or UNCOMMON for Pauper Binder.");
+                    }
+                } else if (selectedBinder instanceof CollectorBinder) {
+                    if ((selectedCard.getRarity().equalsIgnoreCase("RARE") || selectedCard.getRarity().equalsIgnoreCase("LEGENDARY"))
+                            && !selectedCard.getVariant().equalsIgnoreCase("NORMAL")) {
+                        isValid = true;
+                    } else {
+                        HelperController.showAlert("Invalid Card", "Card must be either RARE or LEGENDARY and not NORMAL for Collector Binder.");
+                    }
+                } else {
+                    // For other binders, assume it's valid to add the card
+                    isValid = true;
                 }
-                showBinderDetails();
+
+                // If valid, add the card to the binder
+                if (isValid) {
+                    if (HelperController.confirmAction("Adding Card", "Are you sure you want to add " + selectedCard.getName() + " to " + selectedBinder.getName())) {
+                        selectedBinder.addCard(selectedCard);
+                    }
+                }
+
+                showBinderDetails(); // Refresh binder details after card is added
             }
         });
     }
@@ -266,4 +366,3 @@ public class ManageBindersController {
         });
     }
 }
-
