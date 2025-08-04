@@ -76,25 +76,36 @@ public class ManageBindersController {
 
         if (selectedBinder != null) {
             StringBuilder sb = new StringBuilder();
+
+            // Show the binder type (LuxuryBinder, PauperBinder, etc.)
+            String binderType = "Binder Type: " + selectedBinder.getClass().getSimpleName();
+            sb.append(binderType).append("\n\n");
+
+            // List the cards in the selected binder
             for (Cards card : selectedBinder.getCard()) {
                 sb.append(card.toString()).append("\n");
             }
+
+            // Set the text in the cardsTextArea
             cardsTextArea.setText(sb.toString());
 
+            // Determine if the binder is sellable
             boolean sellable = selectedBinder instanceof Sellable;
             sellBinderButton.setVisible(sellable);
             tradeCardButton.setVisible(!sellable);
             addCardButton.setDisable(false);
             removeCardButton.setDisable(false);
 
+            // Show custom price options for LuxuryBinders
             if (selectedBinder instanceof LuxuryBinder) {
                 setCustomPriceButton.setVisible(true);
-                customPriceTextField.setVisible(true); // Show custom price input and button for LuxuryBinder
+                customPriceTextField.setVisible(true); // Show custom price input for LuxuryBinder
             } else {
                 setCustomPriceButton.setVisible(false);
                 customPriceTextField.setVisible(false); // Hide for other binders
             }
         } else {
+            // Clear everything when no binder is selected
             cardsTextArea.clear();
             addCardButton.setDisable(true);
             removeCardButton.setDisable(true);
@@ -104,6 +115,7 @@ public class ManageBindersController {
             customPriceTextField.setVisible(false);
         }
     }
+
 
     @FXML
     public void setCustomPrice(ActionEvent event) {
