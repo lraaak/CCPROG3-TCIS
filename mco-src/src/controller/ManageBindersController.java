@@ -5,7 +5,6 @@ import com.*;
 import java.io.IOException;
 import java.util.*;
 
-import com.Collection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,12 +25,6 @@ public class ManageBindersController {
 
     @FXML
     private TextArea cardsTextArea;
-
-    @FXML
-    private ListView<String> cardsListView;
-
-    @FXML
-    private Button deleteBinderButton;
 
     @FXML
     private Button sellBinderButton;
