@@ -1,15 +1,13 @@
 package controller;
 
 import com.*;
-
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
 public class MainMenuController {
@@ -36,8 +34,7 @@ public class MainMenuController {
     public void setTCIS(TCIS tcis) {
         this.tcis = tcis;
         updateMoneyLabel();
-        ManageDecksButton.setDisable(tcis.getDecks().isEmpty());
-        ManageBindersButton.setDisable(tcis.getBinders().isEmpty());
+        updateManageButtons();  // Update the visibility of buttons
     }
 
     // Update the money label based on current TCIS balance
@@ -46,21 +43,24 @@ public class MainMenuController {
         moneyLabel.setText("Money: $" + String.format("%.2f", currentMoney)); // Update label with formatted money
     }
 
-    @FXML
-    public void handleAddCard () {
-        try {
+    private void updateManageButtons() {
+        boolean hasDecks = !tcis.getDecks().isEmpty();
+        boolean hasBinders = !tcis.getBinders().isEmpty();
 
+        ManageDecksButton.setVisible(hasDecks);  // Only show if there are decks
+        ManageBindersButton.setVisible(hasBinders);  // Only show if there are binders
+    }
+
+    @FXML
+    public void handleAddCard() {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/add_card.fxml"));
             AnchorPane root = loader.load();
-
 
             AddCardController addCardController = loader.getController();
             addCardController.setTCIS(tcis);
 
-
             Stage stage = (Stage) addCardButton.getScene().getWindow();
-
-
             stage.setScene(new Scene(root));
             stage.show();
 
@@ -72,18 +72,13 @@ public class MainMenuController {
     @FXML
     public void handleAddDeck() {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/add_Deck.fxml"));
             AnchorPane root = loader.load();
-
 
             AddDeckController addDeckController = loader.getController();
             addDeckController.setTCIS(tcis);
 
-
             Stage stage = (Stage) addDeckButton.getScene().getWindow();
-
-
             stage.setScene(new Scene(root));
             stage.show();
 
@@ -95,18 +90,13 @@ public class MainMenuController {
     @FXML
     public void handleAddBinder() {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/add_Binder.fxml"));
             AnchorPane root = loader.load();
-
 
             AddBinderController addBinderController = loader.getController();
             addBinderController.setTCIS(tcis);
 
-
             Stage stage = (Stage) addBinderButton.getScene().getWindow();
-
-
             stage.setScene(new Scene(root));
             stage.show();
 
