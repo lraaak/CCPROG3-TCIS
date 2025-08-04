@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -17,13 +16,14 @@
 
     <!-- Grouped Collection and Card Details -->
     <HBox spacing="20" alignment="CENTER">
-        <!-- TextArea to show details of the selected card -->
-        <TextArea fx:id="cardDetailsArea" editable="false" prefHeight="235.0" prefWidth="300" style="-fx-font-size: 14px; -fx-padding: 10px;" />
+        <!-- ListView to display cards with automatic scrolling -->
+        <ListView fx:id="collectionListView" onMouseClicked="#showCardDetails" style="-fx-font-size: 14px;" prefHeight="200" prefWidth="300" />
 
-        <!-- Scrollable ListView to display cards, wider for better visibility -->
-        <ScrollPane prefHeight="200" prefWidth="300" style="-fx-border-color: black;">
-            <ListView fx:id="collectionListView" onMouseClicked="#showCardDetails" style="-fx-font-size: 14px;" />
-        </ScrollPane>
+        <!-- VBox for displaying selected card details -->
+        <VBox alignment="CENTER" spacing="10">
+            <!-- TextArea to show details of the selected card -->
+            <TextArea fx:id="cardDetailsArea" editable="false" prefHeight="235.0" prefWidth="300" style="-fx-font-size: 14px; -fx-padding: 10px;" wrapText="true" />
+        </VBox>
     </HBox>
 
     <!-- Action Buttons -->
