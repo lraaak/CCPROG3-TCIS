@@ -23,9 +23,6 @@ public class ManageDecksController {
     private TextArea cardsTextArea;
 
     @FXML
-    private Button deleteDeckButton;
-
-    @FXML
     private Button sellDeckButton;
 
     @FXML
