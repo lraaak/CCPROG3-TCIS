@@ -140,4 +140,8 @@ public class Cards {
     public int getSelfCount() {
         return self_count;
     }
+
+    public String toString(){
+        return name;
+    }
 }

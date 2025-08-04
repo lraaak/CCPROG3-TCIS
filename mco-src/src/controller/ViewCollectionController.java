@@ -67,7 +67,7 @@ public class ViewCollectionController {
 
 
     @FXML
-    public void handleBackToMainMenu(ActionEvent event) {
+    public void handleBackToMainMenu() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/MainMenu.fxml"));
             Parent root = loader.load();

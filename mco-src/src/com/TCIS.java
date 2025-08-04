@@ -22,6 +22,17 @@ import java.util.*;
             this.collection = new Collection();
             money = 0;
         }
+        /*
+        this is for the new lines of codes for gui
+         */
+
+        public void addDeck (Decks deck){
+            decks.add(deck);
+        }
+
+        public void addBinder(Binders binder){
+            binders.add(binder);
+        }
 
         /**
          * Checks if the TCIS system is valid (i.e., decks, binders, and collection are not null).

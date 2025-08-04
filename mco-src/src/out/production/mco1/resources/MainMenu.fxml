@@ -14,7 +14,8 @@
     <Button fx:id="addDeckButton" layoutX="51.0" layoutY="126.0" onAction="#handleAddDeck" text="Add Deck" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="126.0" />
     <Button fx:id="addBinderButton" layoutX="51.0" layoutY="175.0" onAction="#handleAddBinder" text="Add Binder" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="175.0" />
     <Button fx:id="viewCollectionButton" layoutX="51.0" layoutY="219.0" onAction="#handleViewCollection" text="View Collection" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="219.0" />
-
+    <Button fx:id="ManageDecksButton" layoutX="51.0" layoutY="219.0" onAction="#handleManageDecks" text="Manage Decks" AnchorPane.leftAnchor="151.0" AnchorPane.topAnchor="84.0"/>
+    <Button fx:id="ManageBindersButton" layoutX="51.0" layoutY="219.0" onAction="#handleManageBinders" text="Manage Binders" AnchorPane.leftAnchor="151.0" AnchorPane.topAnchor="126.0"/>
     <!-- Label to display money -->
     <Label fx:id="moneyLabel" layoutX="51.0" layoutY="266.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Money: $0.00" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="51.0" />
 </AnchorPane>

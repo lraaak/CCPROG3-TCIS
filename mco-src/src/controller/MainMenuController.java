@@ -24,6 +24,10 @@ public class MainMenuController {
     private Button addBinderButton;
     @FXML
     private Button viewCollectionButton;
+    @FXML
+    private Button ManageDecksButton;
+    @FXML
+    private Button ManageBindersButton;
 
     @FXML
     private Label moneyLabel; // Label to display money
@@ -31,7 +35,9 @@ public class MainMenuController {
     @FXML
     public void setTCIS(TCIS tcis) {
         this.tcis = tcis;
-        updateMoneyLabel();  // Update the money display when the TCIS is set
+        updateMoneyLabel();
+        ManageDecksButton.setDisable(tcis.getDecks().isEmpty());
+        ManageBindersButton.setDisable(tcis.getBinders().isEmpty());
     }
 
     // Update the money label based on current TCIS balance
@@ -65,19 +71,47 @@ public class MainMenuController {
 
     @FXML
     public void handleAddDeck() {
-        if (tcis != null && tcis.isValid()) {
-            System.out.println("Add Deck clicked.");
-        } else {
-            System.out.println("TCIS is not initialized properly.");
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/add_Deck.fxml"));
+            AnchorPane root = loader.load();
+
+
+            AddDeckController addDeckController = loader.getController();
+            addDeckController.setTCIS(tcis);
+
+
+            Stage stage = (Stage) addDeckButton.getScene().getWindow();
+
+
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @FXML
     public void handleAddBinder() {
-        if (tcis != null && tcis.isValid()) {
-            System.out.println("Add Binder clicked.");
-        } else {
-            System.out.println("TCIS is not initialized properly.");
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/add_Binder.fxml"));
+            AnchorPane root = loader.load();
+
+
+            AddBinderController addBinderController = loader.getController();
+            addBinderController.setTCIS(tcis);
+
+
+            Stage stage = (Stage) addBinderButton.getScene().getWindow();
+
+
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -107,4 +141,55 @@ public class MainMenuController {
         }
     }
 
+    @FXML
+    public void handleManageDecks() throws Exception {
+        if (tcis != null && tcis.isValid()) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/manage_decks.fxml"));
+                Parent root = loader.load();
+
+                // Get the controller after loading the FXML
+                ManageDecksController manageController = loader.getController();
+                if (manageController != null) {
+                    manageController.setTCIS(tcis);
+
+                    Scene manageControllerScene = new Scene(root, 600, 400);
+                    Stage primaryStage = (Stage) ManageDecksButton.getScene().getWindow();
+                    primaryStage.setScene(manageControllerScene);
+                    primaryStage.show();
+                } else {
+                    System.err.println("Failed to get ManageDeckScene");
+                }
+            } catch (Exception e) {
+                System.err.println("Error loading manage_deck.fxml: " + e.getMessage());
+                throw e;
+            }
+        }
+    }
+
+    @FXML
+    public void handleManageBinders() throws Exception {
+        if (tcis != null && tcis.isValid()) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/manage_Binders.fxml"));
+                Parent root = loader.load();
+
+                // Get the controller after loading the FXML
+                ManageBindersController manageController = loader.getController();
+                if (manageController != null) {
+                    manageController.setTCIS(tcis);
+
+                    Scene manageControllerScene = new Scene(root, 600, 400);
+                    Stage primaryStage = (Stage) ManageBindersButton.getScene().getWindow();
+                    primaryStage.setScene(manageControllerScene);
+                    primaryStage.show();
+                } else {
+                    System.err.println("Failed to get ManageDeckScene");
+                }
+            } catch (Exception e) {
+                System.err.println("Error loading manage_deck.fxml: " + e.getMessage());
+                throw e;
+            }
+        }
+    }
 }

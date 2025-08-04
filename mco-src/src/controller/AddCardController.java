@@ -14,7 +14,8 @@ import javafx.event.ActionEvent;
 
 public class AddCardController {
 
-    private TCIS tcis;  // Declare TCIS to hold the reference
+    private TCIS tcis;
+    public Cards cardCreated; // public or provide a getter
 
     @FXML
     private TextField cardNameField;
@@ -25,36 +26,22 @@ public class AddCardController {
     @FXML
     private TextField valueField;
 
-    // Setter for TCIS
     public void setTCIS(TCIS tcis) {
         this.tcis = tcis;
-        System.out.println("TCIS object passed successfully to AddCardController.");
     }
-
 
     @FXML
     public void initialize() {
-
         rarityChoiceBox.getItems().addAll("Common", "Uncommon", "Rare", "Legendary");
-
-
         rarityChoiceBox.setValue("Common");
 
-
         variantChoiceBox.getItems().addAll("Normal", "Extended-Art", "Full-Art", "Alt-Art");
-
-
         variantChoiceBox.setValue("Normal");
-
-
         variantChoiceBox.setVisible(false);
 
-
         rarityChoiceBox.setOnAction(this::updateVariantVisibility);
-
         updateVariantVisibility(null);
     }
-
 
     private void updateVariantVisibility(ActionEvent event) {
         if ("Rare".equals(rarityChoiceBox.getValue()) || "Legendary".equals(rarityChoiceBox.getValue())) {
@@ -64,9 +51,44 @@ public class AddCardController {
         }
     }
 
+    @FXML
+    public void handleTradeCard() {
+        setTCIS(tcis);
+        String cardName = cardNameField.getText().trim();
+        String rarity = rarityChoiceBox.getValue();
+        String variant = variantChoiceBox.getValue();
+        String valueStr = valueField.getText().trim();
+
+        if (cardName.isEmpty() || rarity == null || (rarity.equals("Rare") || rarity.equals("Legendary")) && variant == null || valueStr.isEmpty()) {
+            showAlert(AlertType.ERROR, "Invalid Input", "All fields must be filled out.");
+            return;
+        }
+
+        if (rarity.equals("Common") || rarity.equals("Uncommon")) {
+            variant = "Normal";
+        }
+
+        double value;
+        try {
+            value = Double.parseDouble(valueStr);
+            if (value <= 0) {
+                showAlert(AlertType.ERROR, "Invalid Value", "Value must be greater than zero.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showAlert(AlertType.ERROR, "Invalid Value", "Value must be a valid number.");
+            return;
+        }
+
+        // Create the card and store it
+        this.cardCreated = new Cards(cardName, rarity.toUpperCase(), variant.toUpperCase(), value);
+
+        closeWindow();
+    }
 
     @FXML
     public void handleAddCard() {
+        setTCIS(tcis);
         String cardName = cardNameField.getText().trim();
         String rarity = rarityChoiceBox.getValue();
         String variant = variantChoiceBox.getValue();
@@ -96,7 +118,6 @@ public class AddCardController {
             return;
         }
 
-
         Cards existingCard = Helper.findCard(cardName, tcis.getCollection().getCard());
         if (existingCard != null && existingCard.getRarity().equals(rarity) && existingCard.getVariant().equals(variant)) {
 
@@ -104,15 +125,13 @@ public class AddCardController {
             showAlert(AlertType.INFORMATION, "Card Count Increased", "Card count increased by 1.");
         } else {
             Cards newCard = new Cards(cardName, rarity.toUpperCase(), variant.toUpperCase(), value);
+            cardCreated = newCard;
             Collection.addCard(newCard.getName(), newCard.getRarity(), newCard.getVariant(), newCard.getBaseValue());
             showAlert(AlertType.INFORMATION, "Success", newCard.getName() + " | " + newCard.getRarity() + " | " + newCard.getVariant() + " | $" + newCard.getFinalValue() + " added to the collection.");
         }
 
-
         goBackToMainMenu();
     }
-
-
 
     private void showAlert(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
@@ -142,4 +161,11 @@ public class AddCardController {
             e.printStackTrace();
         }
     }
+
+    public void closeWindow(){
+        Stage stage = (Stage) cardNameField.getScene().getWindow();
+        stage.close();
+    }
 }
+
+

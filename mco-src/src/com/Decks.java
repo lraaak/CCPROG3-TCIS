@@ -114,4 +114,8 @@ public class Decks {
     public static int getTotalDeck() {
         return totalDeck;
     }
+
+    public String toString(){
+        return name;
+    }
 }

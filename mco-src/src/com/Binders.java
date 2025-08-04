@@ -147,4 +147,8 @@ public abstract class Binders {
     public static int getTotalBinders() {
         return totalBinders;
     }
+
+    public String toString(){
+        return name;
+    }
 }
