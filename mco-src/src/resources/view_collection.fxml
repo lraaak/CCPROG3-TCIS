@@ -5,30 +5,33 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="632.0" prefWidth="437.0" spacing="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/24.0.1" fx:controller="controller.ViewCollectionController">
+<VBox alignment="CENTER" prefHeight="632.0" prefWidth="437.0" spacing="15" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/24.0.1" fx:controller="controller.ViewCollectionController">
     <!-- Title Label -->
     <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Your Collection" />
 
     <!-- Message when collection is empty -->
     <Label fx:id="emptyMessage" text="Your collection is empty." visible="false" />
 
-    <!-- Scrollable ListView to display cards -->
-    <ScrollPane prefHeight="200" prefWidth="300" style="-fx-border-color: black;">
-        <ListView fx:id="collectionListView" onMouseClicked="#showCardDetails" style="-fx-font-size: 14px;" />
-    </ScrollPane>
+    <!-- Grouped Collection and Card Details -->
+    <HBox spacing="20" alignment="CENTER">
+        <!-- TextArea to show details of the selected card -->
+        <TextArea fx:id="cardDetailsArea" editable="false" prefHeight="235.0" prefWidth="300" style="-fx-font-size: 14px; -fx-padding: 10px;" />
 
-    <!-- TextArea to show details of the selected card -->
-    <TextArea fx:id="cardDetailsArea" editable="false" prefHeight="235.0" prefWidth="300" style="-fx-font-size: 14px; -fx-padding: 10px;" />
+        <!-- Scrollable ListView to display cards, wider for better visibility -->
+        <ScrollPane prefHeight="200" prefWidth="300" style="-fx-border-color: black;">
+            <ListView fx:id="collectionListView" onMouseClicked="#showCardDetails" style="-fx-font-size: 14px;" />
+        </ScrollPane>
+    </HBox>
 
-    <!-- Button to increase card count -->
-    <Button fx:id="increaseButton" onAction="#increaseCardCount" style="-fx-font-size: 14px;" text="Increase Count" />
-
-    <!-- Button to decrease card count -->
-    <Button fx:id="decreaseButton" onAction="#decreaseCardCount" style="-fx-font-size: 14px;" text="Decrease Count" />
-
-    <Button text="Sell Card" fx:id="sellCardButton" onAction="#sellCard" style="-fx-font-size: 14px;"/>
+    <!-- Action Buttons -->
+    <HBox spacing="15" alignment="CENTER">
+        <Button fx:id="increaseButton" onAction="#increaseCardCount" style="-fx-font-size: 14px;" text="Increase Count" />
+        <Button fx:id="decreaseButton" onAction="#decreaseCardCount" style="-fx-font-size: 14px;" text="Decrease Count" />
+        <Button text="Sell Card" fx:id="sellCardButton" onAction="#sellCard" style="-fx-font-size: 14px;"/>
+    </HBox>
 
     <!-- Back to Main Menu Button -->
     <Button fx:id="backButton" onAction="#handleBackToMainMenu" style="-fx-font-size: 14px; -fx-background-color: #ff7f7f;" text="Back to Main Menu" />

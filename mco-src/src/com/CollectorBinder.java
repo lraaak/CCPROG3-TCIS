@@ -30,4 +30,6 @@ public class CollectorBinder extends Binders {
             System.out.println("Invalid card. Must be either a Legendary or Rare card and not NORMAL.");
         }
     }
+
+
 }

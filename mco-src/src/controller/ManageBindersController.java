@@ -72,11 +72,24 @@ public class ManageBindersController {
 
             // Show the binder type (LuxuryBinder, PauperBinder, etc.)
             String binderType = "Binder Type: " + selectedBinder.getClass().getSimpleName();
-            sb.append(binderType).append("\n\n");
+            sb.append(binderType).append("\n");
 
-            // List the cards in the selected binder
+            // Adds the sale value if the binder is sellable
+            if (selectedBinder instanceof Sellable sellableBinder) {
+                sb.append(String.format("Sale Value: %.2f", sellableBinder.getSaleValue()));
+                if (selectedBinder instanceof LuxuryBinder luxuryBinder) {
+                    sb.append(String.format("  ||  Card Value: %.2f", luxuryBinder.getCardValue()));
+                }
+                sb.append("\n");
+            }
+            sb.append("\n");
+
+            // List the cards in the selected binder along with their prices
             for (Cards card : selectedBinder.getCard()) {
-                sb.append(card.toString()).append("\n");
+                sb.append(card.getName()) // Card name
+                        .append(" - Price: $")
+                        .append(String.format("%.2f", card.getFinalValue())) // Card price
+                        .append("\n");
             }
 
             // Set the text in the cardsTextArea
@@ -108,6 +121,7 @@ public class ManageBindersController {
             customPriceTextField.setVisible(false);
         }
     }
+
 
 
     @FXML

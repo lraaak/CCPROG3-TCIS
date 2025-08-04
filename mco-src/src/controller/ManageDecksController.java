@@ -54,12 +54,24 @@ public class ManageDecksController {
         selectedDeck = deckListView.getSelectionModel().getSelectedItem();
 
         if (selectedDeck != null) {
-            List<String> lines = new ArrayList<>();
-            for (Cards card : selectedDeck.getCard()) {
-                lines.add(card.toString());
-            }
-            cardsTextArea.setText(String.join("\n", lines));
+            StringBuilder sb = new StringBuilder();
 
+            // Check if it's a SellableDeck and show its total value
+            if (selectedDeck instanceof SellableDeck) {
+                SellableDeck sellableDeck = (SellableDeck) selectedDeck;
+                double totalDeckValue = sellableDeck.getSaleValue();
+                sb.append("Deck Sale Value: $").append(String.format("%.2f", totalDeckValue)).append("\n\n");
+            }
+
+            // Display card details including price for each card
+            for (Cards card : selectedDeck.getCard()) {
+                sb.append(card.toString())
+                        .append(" - Price: $")
+                        .append(String.format("%.2f", card.getFinalValue()))
+                        .append("\n");
+            }
+
+            cardsTextArea.setText(sb.toString());
 
             sellDeckButton.setVisible(selectedDeck instanceof Sellable);
             addCardButton.setDisable(false);
@@ -71,6 +83,7 @@ public class ManageDecksController {
             sellDeckButton.setVisible(false);
         }
     }
+
 
     @FXML
     public void deleteDeck() {
