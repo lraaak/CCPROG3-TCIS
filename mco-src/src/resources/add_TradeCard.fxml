@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="360.0" prefWidth="387.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCardController">
+    <!-- Title -->
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Add a New Card" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="20" />
+
+    <!-- Card Name -->
+    <Label text="Card Name:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="70" />
+    <TextField fx:id="cardNameField" promptText="Enter Card Name" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="70" />
+
+    <!-- Card Rarity -->
+    <Label text="Rarity:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="120" />
+    <ChoiceBox fx:id="rarityChoiceBox" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="120" />
+
+    <!-- Card Variant (Initially hidden) -->
+    <Label text="Variant:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="170" />
+    <ChoiceBox fx:id="variantChoiceBox" visible="false" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="170" />
+
+    <!-- Card Value -->
+    <Label text="Card Value:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="220" />
+    <TextField fx:id="valueField" promptText="Enter Value" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="220" />
+
+    <!-- Add Card Button -->
+    <Button fx:id="addCardButton" layoutX="50.0" layoutY="270.0" onAction="#handleTradeCard" text="Add Card" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="270.0" />
+
+    <!-- Back to Main Menu Button -->
+    <Button fx:id="backToMainMenuButton" layoutX="165.0" layoutY="270.0" onAction="#closeWindow" text="Back to Main Menu" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="270.0" />
+</AnchorPane>
