@@ -24,7 +24,7 @@ public class Main extends Application {
         mediaPlayer.play();
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.setAutoPlay(true);
-        mediaPlayer.setVolume(0.5);
+        mediaPlayer.setVolume(0.3);
     }
 
 
