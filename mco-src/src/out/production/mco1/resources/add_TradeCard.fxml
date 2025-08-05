@@ -6,29 +6,30 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="360.0" prefWidth="387.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCardController">
+<AnchorPane prefHeight="360.0" prefWidth="387.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCardController" style="-fx-background-color: #000000;"> <!-- Black background -->
+
     <!-- Title -->
-    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Add a New Card" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="20" />
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF;" text="Add a New Card" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="20" />
 
     <!-- Card Name -->
-    <Label text="Card Name:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="70" />
-    <TextField fx:id="cardNameField" promptText="Enter Card Name" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="70" />
+    <Label text="Card Name:" style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF;" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="70" />
+    <TextField fx:id="cardNameField" promptText="Enter Card Name" style="-fx-background-color: #FFFFFF; -fx-text-fill: #000000;" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="70" />
 
     <!-- Card Rarity -->
-    <Label text="Rarity:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="120" />
-    <ChoiceBox fx:id="rarityChoiceBox" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="120" />
+    <Label text="Rarity:" style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF;" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="120" />
+    <ChoiceBox fx:id="rarityChoiceBox" style="-fx-background-color: #FFFFFF;" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="120" />
 
     <!-- Card Variant (Initially hidden) -->
-    <Label text="Variant:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="170" />
-    <ChoiceBox fx:id="variantChoiceBox" visible="false" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="170" />
+    <Label text="Variant:" style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF;" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="170" />
+    <ChoiceBox fx:id="variantChoiceBox" visible="false" style="-fx-background-color: #FFFFFF;" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="170" />
 
     <!-- Card Value -->
-    <Label text="Card Value:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="220" />
-    <TextField fx:id="valueField" promptText="Enter Value" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="220" />
+    <Label text="Card Value:" style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF;" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="220" />
+    <TextField fx:id="valueField" promptText="Enter Value" style="-fx-background-color: #FFFFFF; -fx-text-fill: #000000;" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="220" />
 
     <!-- Add Card Button -->
-    <Button fx:id="addCardButton" layoutX="50.0" layoutY="270.0" onAction="#handleTradeCard" text="Add Card" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="270.0" />
+    <Button fx:id="addCardButton" onAction="#handleTradeCard" text="Add Card" style="-fx-background-color: #FF5733; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="270.0" />
 
     <!-- Back to Main Menu Button -->
-    <Button fx:id="backToMainMenuButton" layoutX="165.0" layoutY="270.0" onAction="#closeWindow" text="Back to Main Menu" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="270.0" />
+    <Button fx:id="backToMainMenuButton" onAction="#closeWindow" text="Back to Main Menu" style="-fx-background-color: #FF7F7F; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="270.0" />
 </AnchorPane>

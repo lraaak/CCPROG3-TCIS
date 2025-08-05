@@ -10,29 +10,32 @@
 <AnchorPane prefHeight="400.0" prefWidth="387.0"
             xmlns="http://javafx.com/javafx/24.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.AddDeckController">
+            fx:controller="controller.AddDeckController" style="-fx-background-color: #000000;">
 
+   <!-- Title Label -->
    <Label layoutX="70.0" layoutY="40.0" text="Add a New Deck">
       <font>
          <Font name="Arial Bold" size="26.0"/>
       </font>
+      <style>-fx-text-fill: #FFFFFF;</style> <!-- White text color -->
    </Label>
 
-   <Label layoutX="50.0" layoutY="110.0" text="Enter Deck Name:"/>
-   <TextField fx:id="myTextField" layoutX="180.0" layoutY="105.0" prefWidth="150.0"/>
+   <!-- Deck Name -->
+   <Label layoutX="50.0" layoutY="110.0" text="Enter Deck Name:" style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF;"/>
+   <TextField fx:id="myTextField" layoutX="180.0" layoutY="105.0" prefWidth="150.0" style="-fx-font-size: 14px;"/>
 
-   <Label layoutX="50.0" layoutY="170.0" text="Select Deck Type:"/>
-   <ChoiceBox fx:id="myChoiceBox" layoutX="180.0" layoutY="165.0" prefWidth="150.0"/>
+   <!-- Deck Type -->
+   <Label layoutX="50.0" layoutY="170.0" text="Select Deck Type:" style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF;"/>
+   <ChoiceBox fx:id="myChoiceBox" layoutX="180.0" layoutY="165.0" prefWidth="150.0" style="-fx-font-size: 14px;"/>
 
+   <!-- Confirm Button -->
    <Button fx:id="confirmButton" text="Confirm"
            layoutX="90.0" layoutY="250.0" prefWidth="100.0"
-           onAction="#handleAddDeck"/>
+           style="-fx-background-color: #FF5733; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" onAction="#handleAddDeck"/>
 
+   <!-- Back to Main Menu Button -->
    <Button fx:id="backButton" text="Main Menu"
            layoutX="200.0" layoutY="250.0" prefWidth="100.0"
-           onAction="#handleBackToMainMenu"/>
+           style="-fx-background-color: #FF5733; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" onAction="#handleBackToMainMenu"/>
 
 </AnchorPane>
-
-
-

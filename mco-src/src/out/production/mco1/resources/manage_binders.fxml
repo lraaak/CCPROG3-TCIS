@@ -10,41 +10,42 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 
-<VBox alignment="CENTER" prefHeight="632.0" prefWidth="437.0" spacing="15" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageBindersController">
+<VBox alignment="CENTER" prefHeight="632.0" prefWidth="437.0" spacing="15" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageBindersController" style="-fx-background-color: #000000;"> <!-- Black background -->
 
-    <!-- Title for the section -->
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Your Binders" />
+    <!-- Title for the section with white text -->
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF;" text="Your Binders" />
 
     <!-- Grouped Binder and Cards Information -->
     <HBox spacing="20" alignment="CENTER">
         <!-- List of binders on the left side -->
         <ScrollPane prefHeight="250" prefWidth="200" style="-fx-border-color: black;">
-            <ListView fx:id="bindersListView" onMouseClicked="#showBinderDetails" style="-fx-font-size: 14px;" prefWidth="180" />
+            <ListView fx:id="bindersListView" onMouseClicked="#showBinderDetails" style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF;" prefWidth="180" />
         </ScrollPane>
 
         <!-- Cards details on the right side -->
         <VBox alignment="CENTER" spacing="10">
-            <TextArea fx:id="cardsTextArea" editable="false" prefHeight="235.0" prefWidth="300.0" style="-fx-font-size: 14px; -fx-border-color: black;" wrapText="true" />
+            <!-- TextArea to show details of the selected card with black text for better readability -->
+            <TextArea fx:id="cardsTextArea" editable="false" prefHeight="235.0" prefWidth="300.0" style="-fx-font-size: 14px; -fx-border-color: black; -fx-background-color: #F5F5F5; -fx-text-fill: #000000;" wrapText="true" />
 
             <!-- Conditional Custom Price Section for LuxuryBinder -->
-            <TextField fx:id="customPriceTextField" promptText="Enter Custom Price" visible="false" prefWidth="150" maxWidth="150" style="-fx-font-size: 14px;"/>
-            <Button fx:id="setCustomPriceButton" onAction="#setCustomPrice" text="Set Custom Price" visible="false" style="-fx-font-size: 14px;"/>
+            <TextField fx:id="customPriceTextField" promptText="Enter Custom Price" visible="false" prefWidth="150" maxWidth="150" style="-fx-font-size: 14px; -fx-background-color: #FFFFFF; -fx-text-fill: #000000;"/>
+            <Button fx:id="setCustomPriceButton" onAction="#setCustomPrice" text="Set Custom Price" visible="false" style="-fx-font-size: 14px; -fx-background-color: #FF5733; -fx-text-fill: #FFFFFF;"/>
         </VBox>
     </HBox>
 
-    <!-- Action Buttons -->
+    <!-- Action Buttons with styled text and background -->
     <HBox spacing="15" alignment="CENTER">
-        <Button fx:id="deleteBinderButton" onAction="#deleteBinder" style="-fx-font-size: 14px;" text="Delete Binder" />
-        <Button fx:id="addCardButton" onAction="#handleAddCardToBinder" style="-fx-font-size: 14px;" text="Add Card to Binder" />
-        <Button fx:id="removeCardButton" onAction="#handleRemoveCardFromBinder" style="-fx-font-size: 14px;" text="Remove Card from Binder" />
+        <Button fx:id="deleteBinderButton" onAction="#deleteBinder" style="-fx-font-size: 14px; -fx-background-color: #FF5733; -fx-text-fill: #FFFFFF;" text="Delete Binder" />
+        <Button fx:id="addCardButton" onAction="#handleAddCardToBinder" style="-fx-font-size: 14px; -fx-background-color: #FF5733; -fx-text-fill: #FFFFFF;" text="Add Card to Binder" />
+        <Button fx:id="removeCardButton" onAction="#handleRemoveCardFromBinder" style="-fx-font-size: 14px; -fx-background-color: #FF5733; -fx-text-fill: #FFFFFF;" text="Remove Card from Binder" />
     </HBox>
 
     <!-- Conditional Sell/Trade Buttons stacked on top of each other in VBox -->
     <VBox alignment="CENTER" spacing="10">
-        <Button fx:id="sellBinderButton" onAction="#sellBinder" style="-fx-font-size: 14px;" text="Sell Binder" visible="false" />
-        <Button fx:id="tradeCardButton" onAction="#tradeCard" style="-fx-font-size: 14px;" text="Trade Cards" visible="false" />
+        <Button fx:id="sellBinderButton" onAction="#sellBinder" style="-fx-font-size: 14px; -fx-background-color: #2E8B57; -fx-text-fill: #FFFFFF;" text="Sell Binder" visible="false" />
+        <Button fx:id="tradeCardButton" onAction="#tradeCard" style="-fx-font-size: 14px; -fx-background-color: #2E8B57; -fx-text-fill: #FFFFFF;" text="Trade Cards" visible="false" />
     </VBox>
 
-    <!-- Back Button -->
-    <Button fx:id="backButton" onAction="#handleBackToMainMenu" style="-fx-font-size: 14px; -fx-background-color: #ff7f7f;" text="Back to Main Menu" />
+    <!-- Back Button with red background and white text -->
+    <Button fx:id="backButton" onAction="#handleBackToMainMenu" style="-fx-font-size: 14px; -fx-background-color: #FF7F7F; -fx-text-fill: #FFFFFF;" text="Back to Main Menu" />
 </VBox>

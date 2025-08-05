@@ -5,30 +5,44 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="360.0" prefWidth="387.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCardController">
+<AnchorPane prefHeight="360.0" prefWidth="387.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCardController"> <!-- Set background to black -->
+
     <!-- Title -->
-    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Add a New Card" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="20" />
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Poppins', sans-serif; -fx-text-fill: #FFFFFF;" text="Add a New Card" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="20" />
 
     <!-- Card Name -->
-    <Label text="Card Name:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="70" />
-    <TextField fx:id="cardNameField" promptText="Enter Card Name" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="70" />
+    <Label style="-fx-font-family: 'Poppins', sans-serif; -fx-text-fill: #FFFFFF;" text="Card Name:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="70">
+      <font>
+         <Font name="System Bold" size="13.0" />
+      </font></Label>
+    <TextField fx:id="cardNameField" promptText="Enter Card Name" style="-fx-font-family: 'Poppins', sans-serif; -fx-font-size: 14px;" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="70" />
 
     <!-- Card Rarity -->
-    <Label text="Rarity:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="120" />
-    <ChoiceBox fx:id="rarityChoiceBox" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="120" />
+    <Label style="-fx-font-family: 'Poppins', sans-serif; -fx-text-fill: #FFFFFF;" text="Rarity:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="120">
+      <font>
+         <Font name="Dubai Bold" size="13.0" />
+      </font></Label>
+    <ChoiceBox fx:id="rarityChoiceBox" style="-fx-font-family: 'Poppins', sans-serif; -fx-font-size: 14px;" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="120" />
 
     <!-- Card Variant (Initially hidden) -->
-    <Label text="Variant:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="170" />
-    <ChoiceBox fx:id="variantChoiceBox" visible="false" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="170" />
+    <Label style="-fx-font-family: 'Poppins', sans-serif; -fx-text-fill: #FFFFFF;" text="Variant:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="170">
+      <font>
+         <Font name="System Bold" size="13.0" />
+      </font></Label>
+    <ChoiceBox fx:id="variantChoiceBox" style="-fx-font-family: 'Poppins', sans-serif; -fx-font-size: 14px;" visible="false" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="170" />
 
     <!-- Card Value -->
-    <Label text="Card Value:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="220" />
-    <TextField fx:id="valueField" promptText="Enter Value" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="220" />
+    <Label style="-fx-font-family: 'Poppins', sans-serif; -fx-text-fill: #FFFFFF;" text="Card Value:" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="220">
+      <font>
+         <Font name="System Bold" size="13.0" />
+      </font></Label>
+    <TextField fx:id="valueField" promptText="Enter Value" style="-fx-font-family: 'Poppins', sans-serif; -fx-font-size: 14px;" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="220" />
 
     <!-- Add Card Button -->
-    <Button fx:id="addCardButton" layoutX="50.0" layoutY="270.0" onAction="#handleAddCard" text="Add Card" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="270.0" />
+    <Button fx:id="addCardButton" layoutX="50.0" layoutY="270.0" onAction="#handleAddCard" style="-fx-background-color: #FF5733; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-family: 'Poppins', sans-serif;" text="Add Card" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="270.0" />
 
     <!-- Back to Main Menu Button -->
-    <Button fx:id="backToMainMenuButton" layoutX="165.0" layoutY="270.0" onAction="#handleBackToMainMenu" text="Back to Main Menu" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="270.0" />
+    <Button fx:id="backToMainMenuButton" layoutX="165.0" layoutY="270.0" onAction="#handleBackToMainMenu" style="-fx-background-color: #FF5733; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-family: 'Poppins', sans-serif;" text="Back to Main Menu" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="270.0" />
 </AnchorPane>

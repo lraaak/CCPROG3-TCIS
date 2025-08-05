@@ -8,36 +8,37 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="632.0" prefWidth="437.0" spacing="15" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageDecksController">
+<VBox alignment="CENTER" prefHeight="632.0" prefWidth="437.0" spacing="15" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageDecksController" style="-fx-background-color: #000000;"> <!-- Black background -->
 
-    <!-- Title for the section -->
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Your Decks" />
+    <!-- Title for the section with white text -->
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF;" text="Your Decks" />
 
     <!-- Grouped Deck and Cards Information -->
     <HBox spacing="20" alignment="CENTER">
         <!-- List of decks on the left side -->
         <ScrollPane prefHeight="250" prefWidth="200" style="-fx-border-color: black;">
-            <ListView fx:id="deckListView" onMouseClicked="#showDeckDetails" style="-fx-font-size: 14px;" prefWidth="180" />
+            <ListView fx:id="deckListView" onMouseClicked="#showDeckDetails" style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF;" prefWidth="180" />
         </ScrollPane>
 
         <!-- Cards details on the right side -->
         <VBox alignment="CENTER" spacing="10">
-            <TextArea fx:id="cardsTextArea" editable="false" prefHeight="235.0" prefWidth="300.0" style="-fx-font-size: 14px; -fx-border-color: black;" wrapText="true" />
+            <!-- TextArea to show details of the selected card with black text for better readability -->
+            <TextArea fx:id="cardsTextArea" editable="false" prefHeight="235.0" prefWidth="300.0" style="-fx-font-size: 14px; -fx-border-color: black; -fx-background-color: #F5F5F5; -fx-text-fill: #000000;" wrapText="true" />
         </VBox>
     </HBox>
 
-    <!-- Action Buttons -->
+    <!-- Action Buttons with styled text and background -->
     <HBox spacing="15" alignment="CENTER">
-        <Button fx:id="deleteDeckButton" onAction="#deleteDeck" style="-fx-font-size: 14px;" text="Delete Deck" />
-        <Button fx:id="addCardButton" onAction="#handleAddCardToDeck" style="-fx-font-size: 14px;" text="Add Card to Deck" />
-        <Button fx:id="removeCardButton" onAction="#handleRemoveCardFromDeck" style="-fx-font-size: 14px;" text="Remove Card from Deck" />
+        <Button fx:id="deleteDeckButton" onAction="#deleteDeck" style="-fx-font-size: 14px; -fx-background-color: #FF5733; -fx-text-fill: #FFFFFF;" text="Delete Deck" />
+        <Button fx:id="addCardButton" onAction="#handleAddCardToDeck" style="-fx-font-size: 14px; -fx-background-color: #FF5733; -fx-text-fill: #FFFFFF;" text="Add Card to Deck" />
+        <Button fx:id="removeCardButton" onAction="#handleRemoveCardFromDeck" style="-fx-font-size: 14px; -fx-background-color: #FF5733; -fx-text-fill: #FFFFFF;" text="Remove Card from Deck" />
     </HBox>
 
-    <!-- Conditional Sell Button -->
+    <!-- Conditional Sell Button with green background for sellable decks -->
     <VBox alignment="CENTER" spacing="10">
-        <Button fx:id="sellDeckButton" onAction="#sellDeck" style="-fx-font-size: 14px;" text="Sell Deck" visible="false" />
+        <Button fx:id="sellDeckButton" onAction="#sellDeck" style="-fx-font-size: 14px; -fx-background-color: #2E8B57; -fx-text-fill: #FFFFFF;" text="Sell Deck" visible="false" />
     </VBox>
 
-    <!-- Back Button -->
-    <Button fx:id="backButton" onAction="#handleBackToMainMenu" style="-fx-font-size: 14px; -fx-background-color: #ff7f7f;" text="Back to Main Menu" />
+    <!-- Back Button with red background and white text -->
+    <Button fx:id="backButton" onAction="#handleBackToMainMenu" style="-fx-font-size: 14px; -fx-background-color: #FF7F7F; -fx-text-fill: #FFFFFF;" text="Back to Main Menu" />
 </VBox>
